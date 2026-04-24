@@ -4,8 +4,8 @@ import { Menu, X } from 'lucide-react'
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-    const linkStyle = "text-[15px] font-bold tracking-[0.25em] text-black uppercase hover:text-[#0ea5e9] transition-colors duration-300 ease-in-out"
-    const mobileLinkStyle = "text-xl font-bold tracking-[0.25em] text-black uppercase hover:text-[#0ea5e9] transition-colors duration-300 ease-in-out block py-4"
+    const linkStyle = "font-borscha text-[15px] font-bold tracking-[0.25em] text-black uppercase hover:text-[#0ea5e9] transition-colors duration-300 ease-in-out"
+    const mobileLinkStyle = "font-borscha text-xl font-bold tracking-[0.25em] text-black uppercase hover:text-[#0ea5e9] transition-colors duration-300 ease-in-out block py-4"
 
     const leftLinkVariants: Variants = {
         hidden: { opacity: 0, scale: 0.5, x: 80 },
@@ -40,9 +40,9 @@ const Navbar = () => {
                     }}
                     className="hidden lg:flex justify-end gap-12 pr-10"
                 >
-                    <motion.a variants={leftLinkVariants} href="#work" className={linkStyle}>WORK</motion.a>
-                    <motion.a variants={leftLinkVariants} href="#services" className={linkStyle}>SERVICES</motion.a>
-                    <motion.a variants={leftLinkVariants} href="#locations" className={linkStyle}>LOCATIONS</motion.a>
+                    <motion.a variants={leftLinkVariants} href="/locations" className={linkStyle}>LOCALIZATION</motion.a>
+                    <motion.a variants={leftLinkVariants} href="/services" className={linkStyle}>SERVICE</motion.a>
+                    <motion.a variants={leftLinkVariants} href="/work" className={linkStyle}>WORK</motion.a>
                 </motion.div>
 
                 {/* Mobile Empty Spacer Left -> Preserves perfect center rendering in grid-cols-3 */}
@@ -68,9 +68,9 @@ const Navbar = () => {
                     }}
                     className="hidden lg:flex justify-start gap-12 pl-10"
                 >
-                    <motion.a variants={rightLinkVariants} href="#rebate" className={linkStyle}>REBATE</motion.a>
-                    <motion.a variants={rightLinkVariants} href="#about" className={linkStyle}>ABOUT</motion.a>
-                    <motion.a variants={rightLinkVariants} href="#contact" className={linkStyle}>CONTACT</motion.a>
+                    <motion.a variants={rightLinkVariants} href="/about" className={linkStyle}>ABOUT</motion.a>
+                    <motion.a variants={rightLinkVariants} href="/rebate" className={linkStyle}>REBATE</motion.a>
+                    <motion.a variants={rightLinkVariants} href="/contact" className={linkStyle}>CONTACT</motion.a>
                 </motion.div>
 
                 {/* Mobile Hamburger Touch Area */}
@@ -90,12 +90,12 @@ const Navbar = () => {
                         exit={{ opacity: 0, y: -20 }}
                         className="absolute top-[100%] left-0 w-full bg-white shadow-lg lg:hidden flex flex-col items-center py-6 border-t border-gray-100 z-40"
                     >
-                        <a href="#work" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>WORK</a>
-                        <a href="#services" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>SERVICES</a>
-                        <a href="#locations" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>LOCATIONS</a>
-                        <a href="#rebate" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>REBATE</a>
-                        <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>ABOUT</a>
-                        <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>CONTACT</a>
+                        <a href="/locations" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>LOCALIZATION</a>
+                        <a href="/services" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>SERVICE</a>
+                        <a href="/work" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>WORK</a>
+                        <a href="/about" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>ABOUT</a>
+                        <a href="/rebate" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>REBATE</a>
+                        <a href="/contact" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>CONTACT</a>
                     </motion.div>
                 )}
             </AnimatePresence>

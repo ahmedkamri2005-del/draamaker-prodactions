@@ -10,6 +10,7 @@ import WhyMorocco from './components/sections/WhyMorocco'
 import Founder from './components/sections/Founder'
 import Footer from './components/layout/Footer'
 import LocationsPage from './app/locations/page'
+import ContactPage from './app/contact/page'
 import ChatbotIcon from './components/layout/ChatbotIcon'
 
 function App() {
@@ -25,6 +26,18 @@ function App() {
         return <LocationsPage />
     }
 
+    if (currentPath === '/contact') {
+        return (
+            <>
+                <ContactPage />
+                <Footer />
+            </>
+        )
+    }
+
+    // Footer is only shown on the Home page (/) by default
+    const showFooter = currentPath === '/'
+
     return (
         <div className="min-h-screen text-white selection:bg-white selection:text-black">
             <Navbar />
@@ -37,7 +50,7 @@ function App() {
                 <WhyMorocco />
                 <SelectedCredits />
             </main>
-            <Footer />
+            {showFooter && <Footer />}
             <ChatbotIcon />
         </div>
     )
