@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const videos = [
     "/videos/11.mp4",
@@ -21,20 +21,22 @@ const HeroSection = () => {
     return (
         <section className="relative w-full h-screen overflow-hidden m-0 p-0">
             {/* Background Video Loop with Cross-fade */}
-            <div className="absolute inset-0 -z-20 scale-110 pointer-events-none">
+            <div className="absolute inset-0 z-0 scale-110 pointer-events-none">
                 <AnimatePresence mode="popLayout">
                     <motion.video
                         key={currentVideoIndex}
                         src={videos[currentVideoIndex]}
-                        initial={{ opacity: 0 }}
+                        initial={{ opacity: 1 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 1.5, ease: "easeInOut" }}
                         autoPlay
                         muted
+                        loop
                         playsInline
+                        preload="auto"
                         onEnded={handleVideoEnd}
-                        className="absolute top-0 left-0 w-full h-full object-cover"
+                        className="absolute inset-0 w-full h-full object-cover z-0"
                     />
                 </AnimatePresence>
             </div>
@@ -48,7 +50,7 @@ const HeroSection = () => {
             />
 
             {/* Overlay for legibility */}
-            <div className="absolute inset-0 bg-black/30 -z-10"></div>
+            <div className="absolute inset-0 bg-black/30 z-10"></div>
 
             {/* Absolute positioning to touch the bottom */}
             <div className="absolute bottom-8 md:bottom-12 lg:bottom-16 left-0 w-full px-6 md:px-24 z-20 flex flex-col items-start text-left">
@@ -56,7 +58,7 @@ const HeroSection = () => {
                 <motion.h1
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
+                    transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
                     className="text-[40px] md:text-[60px] mb-4 font-serif text-white max-w-2xl leading-[1.1] drop-shadow-2xl"
                 >
                     With over 26 years of excellence and an Emmy Award-winning legacy.
@@ -66,7 +68,7 @@ const HeroSection = () => {
                 <motion.p
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.2, ease: "easeOut", delay: 0.8 }}
+                    transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
                     className="text-sm md:text-xl text-gray-100 max-w-[85%] md:max-w-2xl font-medium"
                 >
                     Dreamaker Productions is the definitive gateway to international filmmaking in Morocco. We blend local mastery with uncompromising global standards
@@ -77,7 +79,7 @@ const HeroSection = () => {
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.2, ease: "easeOut", delay: 1.1 }}
+                transition={{ duration: 1.2, ease: "easeOut", delay: 0.7 }}
                 className="absolute bottom-12 right-6 md:bottom-16 md:right-24 z-30 flex flex-col items-end"
             >
                 <motion.a
