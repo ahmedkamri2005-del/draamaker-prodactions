@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3730.72 2329.18">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        font-family: NeueKabel-ExtraBold, 'Neue Kabel';
+        font-size: 1296px;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <g id="Layer_2-2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1-2">
+      <rect class="cls-1" x="16.74" y="2118.2" width="672.13" height="210.98"/>
+      <rect class="cls-1" x="16.74" y="1809.49" width="672.12" height="97.49"/>
+      <path class="cls-1" d="M3673.75,1510.63H42.16c46.84-129.84,154.14-220.63,279.02-220.63h3073.55c124.88,0,232.19,90.79,279.01,220.63Z"/>
+      <path class="cls-1" d="M3682.46,2118.21c-49.13,124.66-155.39,210.97-278.53,210.97H295.38c-123.15,0-229.4-86.31-278.54-210.97h3665.61Z"/>
+      <rect class="cls-1" x="16.74" y="1720.2" width="3665.72" height="186.78"/>
+      <rect class="cls-1" x="3090.27" y="1290" width="592.18" height="220.63"/>
+      <rect class="cls-1" x="3090.27" y="1720.2" width="592.19" height="8.23"/>
+    </g>
+    <text class="cls-2" transform="translate(0 1101.59)"><tspan x="0" y="0">MENU</tspan></text>
+  </g>
+</svg>
