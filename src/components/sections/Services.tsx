@@ -7,22 +7,22 @@ const servicesData = [
     {
         title: "Line Production",
         description: "Comprehensive line production management from start to finish.",
-        image: "/images/dreamaker-planning-1.jpg"
+        image: "/studios/dulcie 2 - Copy.jpeg"
     },
     {
         title: "Location Logistics",
         description: "Elite location scouting and seamless logistical operations.",
-        image: "/images/dreamaker-locations-7.jpg"
+        image: "/studios/dulcie 3 - Copy.jpeg"
     },
     {
         title: "Government Permits",
         description: "Direct government liaison for all necessary filming permits.",
-        image: "/images/dreamaker-planning-8.jpg"
+        image: "/studios/DSC00c511-1-1024x683.png"
     },
     {
         title: "Crews & Vendors",
         description: "Professional sourcing of world-class technical crews and equipment vendors.",
-        image: "/images/dreamaker-setup-6.jpg"
+        image: "/studios/DSC00506-1-1024x689.jpg"
     }
 ]
 

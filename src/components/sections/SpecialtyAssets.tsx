@@ -43,7 +43,7 @@ const SpecialtyAssets = () => {
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="flex flex-col"
                     >
-                        <img src="/images/dreamaker-setup-6.jpg" alt="Studio Setup" className="w-full aspect-video object-cover rounded-xl mb-8 shadow-2xl" />
+                        <img src="/studios/WhatsApp-Image-2024-01-27-at-15.34.20.jpeg" alt="Studio Setup" className="w-full aspect-video object-cover rounded-xl mb-8 shadow-2xl" />
                         <h4 className="text-3xl font-serif text-white mb-4">Controlled Environments</h4>
                         <p className="text-xl text-gray-400 leading-relaxed max-w-2xl">When natural landscapes need complementing, we provide access to world-class studio facilities and large-scale architectural builds.</p>
                     </motion.div>

@@ -37,13 +37,13 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="fixed top-0 left-0 w-full h-20 z-50 bg-white shadow-sm px-12">
-            <div className="max-w-[1800px] mx-auto h-full grid grid-cols-3 items-center">
+        <nav className="fixed top-0 left-0 w-full h-20 bg-white z-50 flex items-center justify-between px-4 shadow-sm">
+            <div className="w-full flex items-center">
 
                 {/* Left side: Links */}
-                <div className="hidden lg:flex justify-end gap-12 pr-12">
+                <div className="flex-1 hidden lg:flex justify-end gap-x-12 pr-12">
                     <motion.div custom={2} initial="hidden" animate="visible" variants={leftLinkVariants}>
-                        <Link href="/locations" className={linkStyle}>LOCALISATION</Link>
+                        <Link href="/localisation" className={linkStyle}>LOCALISATION</Link>
                     </motion.div>
                     <motion.div custom={1} initial="hidden" animate="visible" variants={leftLinkVariants}>
                         <Link href="/services" className={linkStyle}>SERVICE</Link>
@@ -54,7 +54,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Center: Logo */}
-                <div className="flex justify-center relative z-[60]">
+                <div className="flex-none flex justify-center items-center">
                     <Link href="/" className="block">
                         <img
                             src="/logos/dreamakerLogo.png"
@@ -65,12 +65,12 @@ const Navbar = () => {
                 </div>
 
                 {/* Right side: Links */}
-                <div className="hidden lg:flex justify-start gap-12 pl-12">
+                <div className="flex-1 hidden lg:flex justify-start gap-x-12 pl-12">
                     <motion.div custom={0} initial="hidden" animate="visible" variants={rightLinkVariants}>
                         <Link href="/about" className={linkStyle}>ABOUT</Link>
                     </motion.div>
                     <motion.div custom={1} initial="hidden" animate="visible" variants={rightLinkVariants}>
-                        <Link href="/rebate" className={linkStyle}>REBATE</Link>
+                        <Link href="/studios" className={linkStyle}>STUDIOS</Link>
                     </motion.div>
                     <motion.div custom={2} initial="hidden" animate="visible" variants={rightLinkVariants}>
                         <Link href="/contact" className={linkStyle}>CONTACT</Link>
@@ -78,7 +78,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile Hamburger */}
-                <div className="flex lg:hidden justify-end col-start-3">
+                <div className="flex-1 flex lg:hidden justify-end">
                     <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Menu" className="p-2">
                         {isMobileMenuOpen ? <X size={28} className="text-black" /> : <Menu size={28} className="text-black" />}
                     </button>
@@ -93,11 +93,11 @@ const Navbar = () => {
                         exit={{ opacity: 0, y: -20 }}
                         className="absolute top-[100%] left-0 w-full bg-white shadow-lg lg:hidden flex flex-col items-center py-6 border-t border-gray-100 z-40"
                     >
-                        <Link href="/locations" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>LOCALISATION</Link>
+                        <Link href="/localisation" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>LOCALISATION</Link>
                         <Link href="/services" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>SERVICE</Link>
                         <Link href="/work" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>WORK</Link>
                         <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>ABOUT</Link>
-                        <Link href="/rebate" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>REBATE</Link>
+                        <Link href="/studios" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>STUDIOS</Link>
                         <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkStyle}>CONTACT</Link>
                     </motion.div>
                 )}

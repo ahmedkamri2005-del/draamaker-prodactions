@@ -36,13 +36,13 @@ const WhoWeAre = () => {
                     className="grid grid-cols-1 md:grid-cols-2 gap-4 h-[600px]"
                 >
                     <div className="col-span-1 row-span-2 relative rounded-lg overflow-hidden">
-                        <img src="/images/dreamaker-setup-2.jpg" alt="Crew on set" className="object-cover w-full h-full" />
+                        <img src="/studios/duclie11 - Copy.jpeg" alt="Crew on set" className="object-cover w-full h-full" />
                     </div>
                     <div className="col-span-1 row-span-1 relative rounded-lg overflow-hidden">
-                        <img src="/images/dreamaker-locations-4.jpg" alt="Moroccan location" className="object-cover w-full h-full" />
+                        <img src="/studios/koh9 - Copy.jpg" alt="Moroccan location" className="object-cover w-full h-full" />
                     </div>
                     <div className="col-span-1 row-span-1 relative rounded-lg overflow-hidden">
-                        <img src="/images/dreamaker-setup-6.jpg" alt="Production setup" className="object-cover w-full h-full" />
+                        <img src="/studios/dulcie1 - Copy.jpeg" alt="Production setup" className="object-cover w-full h-full" />
                     </div>
                 </motion.div>
             </div>

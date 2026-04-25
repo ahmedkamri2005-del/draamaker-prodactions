@@ -5,10 +5,7 @@ import { ArrowRight } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 const videos = [
-    "/videos/11.mp4",
-    "/videos/aerial-ait-ben-haddou-morocco-2025-12-17-03-40-43-utc.webm",
-    "/videos/intricate-moroccan-interior-with-vibrant-lighting-2026-01-28-05-40-24-utc.webm",
-    "/videos/ait-ben-haddou-in-morocco-2025-12-17-18-44-20-utc.webm"
+    "/videos/backgrounds.webm"
 ]
 
 const HeroSection = () => {
