@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import Footer from '../../components/layout/Footer'
+import BackHome from '../../components/ui/BackHome'
 
 const panelTransition = { duration: 0.5, ease: 'easeOut' as const }
 
@@ -26,9 +27,10 @@ export default function ContactPage() {
 
     return (
         <>
-            <div className="relative min-h-screen overflow-hidden pt-20">
+            <BackHome />
+            <div className="relative min-h-screen overflow-hidden border-t border-black/10">
                 {/* Split Screen Container */}
-                <div className="flex flex-col lg:flex-row min-h-screen overflow-hidden border-t border-black/10">
+                <div className="flex flex-col lg:flex-row min-h-screen overflow-hidden">
 
                     {/* === LEFT SIDE: BLACK — Office Details === */}
                     <motion.div

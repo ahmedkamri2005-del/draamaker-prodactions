@@ -5,7 +5,7 @@ import BackHome from '../../components/ui/BackHome'
 
 export default function AboutPage() {
     return (
-        <main className="bg-white text-black min-h-screen pt-32 pb-20 overflow-hidden">
+        <main className="bg-white text-black min-h-screen pb-20 overflow-hidden">
             <BackHome />
 
             {/* --- SECTION 1: Editorial Hero --- */}

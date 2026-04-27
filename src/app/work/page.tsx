@@ -32,7 +32,7 @@ export default function WorkPage() {
     const [activeTrailer, setActiveTrailer] = useState<string | null>(null)
 
     return (
-        <main className="bg-black text-white min-h-screen pt-24 pb-20 overflow-hidden relative">
+        <main className="bg-black text-white min-h-screen pb-20 overflow-hidden relative">
             <BackHome />
 
             {/* Animated logos background */}

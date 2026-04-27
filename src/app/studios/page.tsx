@@ -159,7 +159,7 @@ export default function StudiosPage() {
                         transition={{ duration: 1.6, ease: 'easeOut', delay: 0.3 }}
                         className="relative z-20 font-borscha text-5xl md:text-8xl font-bold uppercase text-white text-center tracking-[0.25em] drop-shadow-2xl"
                     >
-                        JACARANDA<br />STUDIOS
+                        MARRAKECH<br />STUDIOS
                     </motion.h1>
 
                     {/* Subtle scroll hint */}
@@ -205,7 +205,7 @@ export default function StudiosPage() {
                         transition={{ delay: 0.2 }}
                     >
                         <p className="text-white/70 text-lg md:text-xl leading-relaxed max-w-3xl">
-                            Nestled in the heart of Morocco, Jacaranda Studios is a world-class production
+                            Nestled in the heart of Morocco, Marrakech Studios is a world-class production
                             facility designed for international film, television, and commercial productions.
                             With over 3,000 m² of stage space, a dedicated costume and armor department,
                             and an unparalleled creative infrastructure, we offer everything your production demands —

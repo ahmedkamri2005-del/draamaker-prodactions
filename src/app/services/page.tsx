@@ -29,10 +29,10 @@ const services = [
 
 export default function ServicesPage() {
     return (
-        <main className="bg-white text-black min-h-screen font-sans overflow-x-hidden pt-24 md:pt-32">
+        <main className="bg-white text-black min-h-screen font-sans overflow-x-hidden">
             <BackHome />
             <div className="flex flex-col w-full">
-                <h1 className="text-[12vw] font-black uppercase tracking-tighter leading-none p-12 mt-20 font-borscha">SERVICES</h1>
+                <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none p-8 md:p-12 mt-12 font-borscha">SERVICES</h1>
                 {services.map((service, index) => {
                     const isEven = index % 2 === 0;
 
@@ -47,10 +47,10 @@ export default function ServicesPage() {
                                 }`}
                         >
                             <div className={`flex flex-col justify-center p-6 md:p-16 lg:p-24 w-full md:w-1/2 relative ${isEven ? 'md:pr-12' : 'md:pl-12'}`}>
-                                <span className="text-[10rem] opacity-5 absolute -top-20 -left-10 font-black z-0 font-sans">
+                                <span className="text-[6rem] md:text-[8rem] opacity-5 absolute -top-10 -left-6 font-black z-0 font-sans">
                                     0{index + 1}
                                 </span>
-                                <h2 className="text-7xl font-bold mb-6 relative z-10 uppercase tracking-tighter leading-none" style={{ fontFamily: "Inter, sans-serif" }}>
+                                <h2 className="text-4xl md:text-5xl font-bold mb-6 relative z-10 uppercase tracking-tighter leading-none" style={{ fontFamily: "Inter, sans-serif" }}>
                                     {service.title.split(' ').map((word, i) => (
                                         <span key={i} className="block">{word}</span>
                                     ))}
