@@ -145,7 +145,7 @@ export default function CreditsClient() {
       {/* ═══════════════════════════════════════════════════════════════════════
           01. HERO — VIDEO BACKGROUND
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden">
+      <section className="relative h-screen min-h-[100dvh] flex flex-col justify-center items-center text-center px-6 pt-20 overflow-hidden">
         {/* Background Video — Vimeo */}
         <div className="absolute inset-0 z-0 bg-black">
           <iframe

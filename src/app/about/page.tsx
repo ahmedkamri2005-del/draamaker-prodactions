@@ -37,7 +37,7 @@ export default function AboutPage() {
       </Link>
 
       {/* 01. THE HERO (Typographic Impact) */}
-      <section className="bg-black h-screen flex items-center justify-center text-center px-6 md:px-10 relative overflow-hidden pt-44 md:pt-40 pb-12">
+      <section className="bg-black h-screen min-h-[100dvh] flex items-center justify-center text-center px-6 md:px-10 relative overflow-hidden pt-20">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

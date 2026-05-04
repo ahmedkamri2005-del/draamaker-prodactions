@@ -241,7 +241,7 @@ export default function StudiosPage() {
       </Link>
 
       {/* ── 01. HERO SECTION ───────────────────────────────────────────── */}
-      <section className="relative h-screen w-full flex flex-col justify-end items-center text-center px-6 pb-32 md:pb-52 overflow-hidden">
+      <section className="relative h-screen min-h-[100dvh] w-full flex flex-col justify-center items-center text-center px-6 pt-20 overflow-hidden">
         <HeroSlideshow />
         <motion.div 
           initial={{ opacity: 0, y: 40 }}

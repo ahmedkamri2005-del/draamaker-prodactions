@@ -86,7 +86,7 @@ export default function LocationsPage() {
       </Link>
 
       {/* ── HERO SECTION ───────────────────────────────────────────────── */}
-      <section className="relative h-screen w-full flex flex-col justify-center items-center text-center px-6 overflow-hidden">
+      <section className="relative h-screen min-h-[100dvh] w-full flex flex-col justify-center items-center text-center px-6 pt-20 overflow-hidden">
         <div className="absolute inset-0 z-0 bg-black">
           <iframe
             src="https://player.vimeo.com/video/1188941106?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1"

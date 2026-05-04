@@ -18,94 +18,96 @@ export default function Home() {
     return (
         <main className="bg-white min-h-screen font-sans selection:bg-[#009ED8] selection:text-white">
             {/* 1. HERO SECTION */}
-            <section className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
-                {/* HERO BACKGROUND VIDEO */}
-                <div className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
+            <section className="relative w-full h-screen min-h-[100dvh] overflow-hidden bg-black">
+                {/* HERO BACKGROUND VIDEO - Full Screen Absolute */}
+                <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
                     <video
                         src="/videos/backgroun global.webm"
                         autoPlay
                         muted
                         loop
                         playsInline
-                        className="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 scale-[1.1]"
+                        className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-black/70" />
+                    <div className="absolute inset-0 bg-black/60 md:bg-black/70" />
                 </div>
                 
-                <div className="w-full max-w-4xl mx-auto relative flex flex-col items-center z-10 px-6 pt-12">
-                    
-                    {/* 1. THE VIDEO FRAME */}
-                    <motion.div 
-                        initial={{ opacity: 0, scale: 0.98 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.2, ease: "easeOut" as const }}
-                        className="w-full aspect-[16/7] md:aspect-[21/9] rounded-xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] overflow-hidden relative z-0 bg-transparent"
-                    >
-                        <video
-                            src="/videos/video.cader(1).webm"
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            className="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 scale-[1.1]"
-                        />
-                    </motion.div>
+                {/* HERO CONTENT - Centered Overlay */}
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
+                    <div className="w-full h-full md:h-auto md:max-w-4xl mx-auto flex flex-col items-center justify-center">
+                        {/* 1. THE VIDEO FRAME - Full screen on mobile, framed on desktop */}
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.98 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1.2, ease: "easeOut" as const }}
+                            className="w-full h-full md:h-auto md:aspect-[21/9] md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] overflow-hidden relative z-0 bg-transparent"
+                        >
+                            <video
+                                src="/videos/video.cader(1).webm"
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                className="w-full h-full object-cover"
+                            />
+                        </motion.div>
 
-                    {/* 2. THE HEADING */}
-                    <motion.h1 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, ease: "easeOut" as const, delay: 0.3 }}
-                        className="text-[#009ED8] font-bold text-2xl md:text-3xl uppercase text-center mt-8 z-10 tracking-widest"
+                        {/* 2. THE HEADING - Floating over the video frame on mobile */}
+                        <motion.h1 
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, ease: "easeOut" as const, delay: 0.3 }}
+                            className="absolute bottom-24 md:static text-white md:text-[#009ED8] font-bold text-xl md:text-3xl uppercase text-center md:mt-6 z-10 tracking-[0.3em] px-6"
+                        >
+                            SKILLS. EFFICIENCY. ECONOMY
+                        </motion.h1>
+                    </div>
+
+                    {/* 3. LOGO MARQUEE - Positioned at the bottom of the hero */}
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 0.6 }}
+                        className="absolute bottom-8 w-full max-w-6xl mx-auto overflow-hidden relative flex z-20"
+                        style={{ WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}
                     >
-                        SKILLS. EFFICIENCY. ECONOMY
-                    </motion.h1>
+                        <motion.div 
+                            animate={{ x: ["0%", "-50%"] }}
+                            transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
+                            className="flex gap-x-12 md:gap-x-16 items-center flex-nowrap"
+                        >
+                            {[...Array(2)].map((_, i) => (
+                                <div key={i} className="flex gap-x-12 md:gap-x-16 items-center flex-nowrap shrink-0">
+                                    {[
+                                        '/clients/netflix.png',
+                                        '/clients/NATIONALGEOGRAPHIC.png',
+                                        '/clients/history_logo.png',
+                                        '/clients/0.png',
+                                        '/clients/1.png',
+                                        '/clients/2.png',
+                                        '/clients/3.png',
+                                        '/clients/4.png',
+                                        '/clients/7.png',
+                                        '/clients/8.png',
+                                        '/clients/9.png',
+                                        '/clients/so-it-goes-productions-1.png'
+                                    ].map((src, idx) => (
+                                        <img 
+                                            key={`${i}-${idx}`} 
+                                            src={src} 
+                                            alt="Partner Logo" 
+                                            className={`w-auto object-contain opacity-60 hover:opacity-100 transition-opacity shrink-0 ${
+                                                src === '/clients/9.png' 
+                                                    ? 'h-8 md:h-16' 
+                                                    : 'h-5 md:h-10 brightness-0 invert'
+                                            }`} 
+                                        />
+                                    ))}
+                                </div>
+                            ))}
+                        </motion.div>
+                    </motion.div>
                 </div>
-
-                {/* 3. LOGO MARQUEE */}
-                <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.6 }}
-                    className="w-full max-w-6xl mx-auto overflow-hidden mt-10 relative flex"
-                    style={{ WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}
-                >
-                    <motion.div 
-                        animate={{ x: ["0%", "-50%"] }}
-                        transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
-                        className="flex gap-x-16 items-center flex-nowrap"
-                    >
-                        {[...Array(2)].map((_, i) => (
-                            <div key={i} className="flex gap-x-16 items-center flex-nowrap shrink-0">
-                                {[
-                                    '/clients/netflix.png',
-                                    '/clients/NATIONALGEOGRAPHIC.png',
-                                    '/clients/history_logo.png',
-                                    '/clients/0.png',
-                                    '/clients/1.png',
-                                    '/clients/2.png',
-                                    '/clients/3.png',
-                                    '/clients/4.png',
-                                    '/clients/7.png',
-                                    '/clients/8.png',
-                                    '/clients/9.png',
-                                    '/clients/so-it-goes-productions-1.png'
-                                ].map((src, idx) => (
-                                    <img 
-                                        key={`${i}-${idx}`} 
-                                        src={src} 
-                                        alt={`${src.split('/').pop()?.split('.')[0].replace(/[-_]/g, ' ')} Production Partner Logo`} 
-                                        className={`w-auto object-contain opacity-80 hover:opacity-100 transition-opacity shrink-0 ${
-                                            src === '/clients/9.png' 
-                                                ? 'h-12 md:h-16' 
-                                                : 'h-8 md:h-10 brightness-0 invert'
-                                        }`} 
-                                    />
-                                ))}
-                            </div>
-                        ))}
-                    </motion.div>
-                </motion.div>
             </section>
 
             {/* 2. VISION & SERVICES PARALLAX SECTION */}
