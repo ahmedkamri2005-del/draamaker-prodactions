@@ -18,21 +18,21 @@ export default function Home() {
     return (
         <main className="bg-white min-h-screen font-sans selection:bg-[#009ED8] selection:text-white">
             {/* 1. HERO SECTION */}
-            <section className="relative w-full min-h-screen px-6 lg:px-12 flex flex-col items-center justify-center pt-32 pb-12 overflow-hidden">
+            <section className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
                 {/* HERO BACKGROUND VIDEO */}
                 <div className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
-                    <iframe 
-                        src="https://player.vimeo.com/video/1188869168?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1" 
-                        frameBorder="0" 
-                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                        referrerPolicy="strict-origin-when-cross-origin" 
-                        className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 scale-[1.35] md:scale-[1.45]"
-                        title="backgroun global"
-                    ></iframe>
+                    <video
+                        src="/videos/backgroun global.webm"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 scale-[1.1]"
+                    />
                     <div className="absolute inset-0 bg-black/70" />
                 </div>
                 
-                <div className="w-full max-w-4xl mx-auto relative flex flex-col items-center z-10">
+                <div className="w-full max-w-4xl mx-auto relative flex flex-col items-center z-10 px-6 pt-12">
                     
                     {/* 1. THE VIDEO FRAME */}
                     <motion.div 
@@ -41,14 +41,14 @@ export default function Home() {
                         transition={{ duration: 1.2, ease: "easeOut" as const }}
                         className="w-full aspect-[16/7] md:aspect-[21/9] rounded-xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] overflow-hidden relative z-0 bg-transparent"
                     >
-                        <iframe
-                            src="https://player.vimeo.com/video/1188869559?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1"
-                            frameBorder="0"
-                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                            className="absolute top-1/2 left-1/2 w-[102%] aspect-video -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                            title="video.cader(1)"
-                        ></iframe>
+                        <video
+                            src="/videos/video.cader(1).webm"
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            className="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 scale-[1.1]"
+                        />
                     </motion.div>
 
                     {/* 2. THE HEADING */}
@@ -56,7 +56,7 @@ export default function Home() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, ease: "easeOut" as const, delay: 0.3 }}
-                        className="text-[#009ED8] font-bold text-2xl md:text-3xl uppercase text-center mt-6 z-10 tracking-widest"
+                        className="text-[#009ED8] font-bold text-2xl md:text-3xl uppercase text-center mt-8 z-10 tracking-widest"
                     >
                         SKILLS. EFFICIENCY. ECONOMY
                     </motion.h1>
@@ -67,7 +67,7 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, delay: 0.6 }}
-                    className="w-full max-w-6xl mx-auto overflow-hidden mt-6 relative flex"
+                    className="w-full max-w-6xl mx-auto overflow-hidden mt-10 relative flex"
                     style={{ WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}
                 >
                     <motion.div 

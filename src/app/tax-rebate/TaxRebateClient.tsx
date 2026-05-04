@@ -80,7 +80,7 @@ export default function TaxRebateClient() {
       {/* ═══════════════════════════════════════════════════════════════════════
           01. HERO SECTION
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative min-h-[50vh] flex flex-col justify-center items-center text-center px-6 pt-44 pb-32 overflow-hidden">
+      <section className="relative h-screen flex flex-col justify-center items-center text-center px-6 pt-44 pb-32 overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0 bg-black z-0" />
         <div
