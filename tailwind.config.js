@@ -13,8 +13,9 @@ export default {
             },
             fontFamily: {
                 serif: ['Borscha', 'serif'],
-                sans: ['Borscha', 'Inter', 'sans-serif'],
+                sans: ['var(--font-neue-kabel)', 'Inter', 'sans-serif'],
                 borscha: ['Borscha', 'sans-serif'],
+                'neue-kabel': ['var(--font-neue-kabel)', 'sans-serif'],
             },
         },
     },

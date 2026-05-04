@@ -10,8 +10,8 @@ const Hero = () => {
             <video
                 src="/videos/11.mp4"
                 autoPlay
-                loop
                 muted
+                loop
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover -z-20"
             />
@@ -40,7 +40,7 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-lg md:text-xl text-gray-100 mt-6 max-w-2xl font-light"
+                    className="text-lg md:text-xl text-gray-100 mt-6 max-w-2xl font-medium"
                 >
                     Dreamaker Productions is the definitive gateway to international filmmaking in Morocco. We blend local mastery with uncompromising global standards.
                 </motion.p>

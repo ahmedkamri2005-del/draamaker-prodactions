@@ -133,7 +133,7 @@ const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void 
                                 <div className="w-12 h-12 rounded-full overflow-hidden mb-2">
                                     <img src="/favicon.svg" alt="Silhouette" className="w-full h-full object-contain" />
                                 </div>
-                                <p className="text-xs font-light leading-relaxed max-w-[180px]">
+                                <p className="text-xs font-medium leading-relaxed max-w-[180px]">
                                     Greetings. I am your Senior Production Consultant at Dreamaker. How can I assist with your next project?
                                 </p>
                             </div>
@@ -152,7 +152,7 @@ const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void 
                                 )}
                                 <div className={`max-w-[85%] p-3 rounded-xl text-xs leading-relaxed ${msg.role === 'user'
                                     ? 'bg-blue-600 text-white rounded-br-none font-medium'
-                                    : 'bg-white/5 text-white/80 rounded-bl-none font-light border border-white/5'
+                                    : 'bg-white/5 text-white/80 rounded-bl-none font-medium border border-white/5'
                                     }`}>
                                     {msg.content}
                                 </div>
@@ -184,7 +184,7 @@ const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void 
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                                 placeholder="Message..."
-                                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-4 pr-12 text-xs font-light focus:outline-none focus:border-blue-500/50 transition-all"
+                                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-4 pr-12 text-xs font-medium focus:outline-none focus:border-blue-500/50 transition-all"
                             />
                             <button
                                 onClick={handleSend}

@@ -1,179 +1,233 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import BackHome from '../../components/ui/BackHome'
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import QuoteModal from '../../components/QuoteModal';
+import Footer from '../../components/layout/Footer';
+
+// Animation variants
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' as const } }
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: 'easeOut' as const } }
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: 30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: 'easeOut' as const } }
+};
 
 export default function AboutPage() {
-    return (
-        <main className="bg-white text-black min-h-screen pb-20 overflow-hidden">
-            <BackHome />
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-            {/* --- SECTION 1: Editorial Hero --- */}
-            <section className="px-6 text-center">
+  return (
+    <main className="bg-black text-zinc-400 min-h-screen font-sans selection:bg-[#00AEEF] selection:text-white overflow-x-hidden">
+      
+      {/* Floating Back Link */}
+      <Link
+        href="/"
+        className="absolute md:fixed top-28 md:top-32 left-6 md:left-12 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] hover:-translate-x-2 transition-all duration-300 z-40 mix-blend-difference text-white/50 hover:text-white"
+      >
+        <span>&larr;</span> Back to Home
+      </Link>
 
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-                    className="font-borscha text-xs tracking-[0.5em] uppercase text-black/30 mb-8"
-                >
-                    Dreamaker Productions &middot; Est. 1998
-                </motion.p>
+      {/* 01. THE HERO (Typographic Impact) */}
+      <section className="bg-black min-h-[50vh] flex items-center justify-center text-center px-6 md:px-10 relative overflow-hidden pt-44 md:pt-40 pb-12">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          className="max-w-6xl relative z-10"
+        >
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-white uppercase leading-tight tracking-tight">
+            THE BRIDGE BETWEEN GLOBAL VISION AND MOROCCAN REALITY.
+          </h1>
+        </motion.div>
+      </section>
 
-                <motion.h1
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 0.35, ease: 'easeOut' }}
-                    className="font-borscha text-6xl md:text-8xl font-black tracking-tight uppercase leading-none mb-16"
-                >
-                    The Art of<br />Production.
-                </motion.h1>
+      {/* 02. THE FOUNDER (Split Layout - Optimized for height) */}
+      <section className="bg-black py-12 md:py-16 lg:py-20 px-6 lg:px-12 min-h-[70vh] lg:min-h-[85vh] flex items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
+          {/* Left Side: Image */}
+          <motion.div
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="w-full aspect-[4/5] md:max-h-[60vh] rounded-sm overflow-hidden relative group mx-auto"
+          >
+            <img src="/pics.of.dmp/about.us/FRED.webp" alt="Fred Challa" className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
+          </motion.div>
 
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1.2, delay: 0.5, ease: 'easeOut' }}
-                    className="w-[90%] mx-auto h-[60vh] overflow-hidden rounded-sm shadow-2xl"
-                >
-                    <img
-                        src="/images/dreamaker-dreamaker-productions-on-set.png"
-                        alt="Dreamaker Productions on set"
-                        className="w-full h-full object-cover"
-                    />
-                </motion.div>
-            </section>
+          {/* Right Side: Content */}
+          <motion.div
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="flex flex-col justify-center items-center md:items-start text-center md:text-left space-y-6 lg:space-y-8"
+          >
+            <span className="text-[#00AEEF] text-xs md:text-sm tracking-[0.5em] uppercase font-bold">
+              EAST MEETS WEST
+            </span>
+            <div className="space-y-4 lg:space-y-6 text-base md:text-lg lg:text-xl font-medium leading-relaxed">
+              <p>
+                Led by Fouad “Fred” Challa, Dreamaker Productions brings a rare blend of global perspective and local authority to every project. Fred grew up in Morocco before moving to the US at eighteen to pursue his education, graduating from the prestigious UCLA Film School.
+              </p>
+              <p>
+                Spending over 15 years in the US, he built a robust network in the international film community. Returning to Morocco, his vision was clear: to create a production company that could seamlessly bridge the American working mentality with the local system.
+              </p>
+              <p>
+                Today, Fred and his team stand as the definitive gateway for international filmmakers seeking to capture the unparalleled beauty and scale of Morocco, without ever compromising on standard or safety.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
+      {/* 03. THE ACCOLADES (Optimized Layout) */}
+      <section className="bg-zinc-950 py-12 md:py-16 lg:py-20 px-6 lg:px-12 border-t border-white/5 overflow-hidden min-h-[60vh] flex items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Side: Newspaper Clipping Image (Smaller and fully visible) */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="w-full max-w-[500px] mx-auto aspect-[4/3] bg-zinc-900 border border-white/5 p-2 md:p-3 transform -rotate-1 shadow-2xl relative"
+          >
+            <div className="w-full h-full relative overflow-hidden border border-white/10 shadow-[inset_0_0_50px_rgba(0,0,0,0.5)] bg-zinc-950">
+               <img src="/pics.of.dmp/about.us/JOURNAL.webp" alt="Newspaper clipping" className="w-full h-full object-contain" />
+            </div>
+          </motion.div>
 
-            {/* --- SECTION 2: Numbers Grid --- */}
-            <section className="border-t border-black/10 mt-24 pt-12 px-12">
-                <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-black/10">
+          {/* Right Side: Text (Compact and centered) */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="flex flex-col items-center md:items-start text-center md:text-left space-y-4 lg:space-y-6"
+          >
+            <span className="text-[#00AEEF] text-xs md:text-sm tracking-[0.5em] uppercase font-bold">
+              RECOGNIZED WORLDWIDE
+            </span>
+            <p className="text-xl md:text-2xl lg:text-3xl font-serif text-white italic leading-relaxed max-w-[90%] mx-auto md:mx-0">
+              "Our commitment to excellence has been recognized on the highest stages... win an Emmy Award... feature film Pegasus Grand Prize at FESPACO... screening at the MoMA in New York."
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.9, ease: 'easeOut' as const }}
-                        className="flex flex-col items-center text-center py-10 md:px-8"
-                    >
-                        <span className="font-borscha text-7xl md:text-8xl font-black tracking-tight leading-none mb-3">
-                            26+
-                        </span>
-                        <span className="font-borscha text-xs tracking-[0.4em] uppercase text-black/40">
-                            Years of Excellence
-                        </span>
-                    </motion.div>
+      {/* 04. THE GEAR (Full-Width Technical) */}
+      <section className="bg-black py-16 md:py-20 lg:py-24 relative border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-8 md:mb-12 text-center md:text-left">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                <span className="text-[#00AEEF] text-xs md:text-sm tracking-[0.5em] uppercase font-bold block mb-4">
+                    NO COMPROMISES ON GEAR
+                </span>
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif text-white uppercase tracking-tighter">
+                    UNCOMPROMISING STANDARDS
+                </h2>
+            </motion.div>
+        </div>
+        
+        {/* Full Width Image */}
+        <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5 }}
+            className="w-full aspect-video md:aspect-[21/9] relative overflow-hidden bg-zinc-900 border-y border-white/5 group"
+        >
+            <img src="/pics.of.dmp/about.us/TheConnection.webp" alt="High-end technical equipment" className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+        </motion.div>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.9, ease: 'easeOut' as const, delay: 0.1 }}
-                        className="flex flex-col items-center text-center py-10 md:px-8"
-                    >
-                        <span className="font-borscha text-7xl md:text-8xl font-black tracking-tight leading-none mb-3">
-                            1
-                        </span>
-                        <img
-                            src="/emmy-trophy.png"
-                            alt="Emmy Award"
-                            className="h-12 w-auto mb-3 opacity-80"
-                        />
-                        <span className="font-borscha text-xs tracking-[0.4em] uppercase text-black/40">
-                            Emmy Award Winner
-                        </span>
-                    </motion.div>
+        <div className="max-w-4xl mx-auto px-6 lg:px-12 mt-12 text-center">
+            <motion.p 
+                variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                className="text-lg md:text-xl leading-relaxed"
+            >
+                Recognizing that world-class projects require world-class tools, we invested heavily in top-tier equipment. By partnering with leading international manufacturers, we brought the first professional dollies to Morocco. Today, our inventory boasts modern lighting, SkyPanels, LED systems, and the complete ARRI M series.
+            </motion.p>
+        </div>
+      </section>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.9, ease: 'easeOut' as const, delay: 0.2 }}
-                        className="flex flex-col items-center text-center py-10 md:px-8"
-                    >
-                        <span className="font-borscha text-7xl md:text-8xl font-black tracking-tight leading-none mb-3">
-                            100%
-                        </span>
-                        <span className="font-borscha text-xs tracking-[0.4em] uppercase text-black/40">
-                            Global Standards
-                        </span>
-                    </motion.div>
+      {/* 05. THE VIDEO (High-Impact Media) */}
+      <section className="bg-black relative border-t border-white/5 py-12 md:py-16 lg:py-20 flex justify-center px-6">
+        <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="w-full max-w-5xl aspect-[4/3] relative overflow-hidden bg-black group shadow-2xl"
+        >
+            <iframe 
+                src="https://player.vimeo.com/video/1188922590?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                frameBorder="0" 
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                className="absolute inset-0 w-full h-full"
+                title="Fred Challa Interview"
+            ></iframe>
+        </motion.div>
+      </section>
 
-                </div>
-            </section>
+      {/* 06. THE AUTHORITY (Marrakech Film Commission) */}
+      <section className="bg-black py-16 md:py-20 lg:py-24 px-6 lg:px-12 flex flex-col items-center justify-center text-center border-t border-white/5 relative overflow-hidden">
+        {/* Subtle Background Graphic */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.02]">
+           <span className="text-[20vw] md:text-[15vw] font-serif uppercase tracking-tighter text-white select-none">AUTHORITY</span>
+        </div>
+        
+        <motion.div 
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="max-w-4xl relative z-10"
+        >
+          <p className="text-xl md:text-3xl lg:text-4xl font-serif text-white italic leading-relaxed">
+            In 2015, Fred Challa was appointed President of the Marrakech Film Commission. Through this role and every project at Dreamaker, we continue to offer global cinema professionals a reliable partner for efficiency, expertise, and absolute cinematic excellence.
+          </p>
+        </motion.div>
+      </section>
 
+      {/* 07. FOOTER CTA (Minimalist - Compact) */}
+      <section className="bg-zinc-950 py-16 md:py-20 lg:py-24 flex flex-col items-center justify-center text-center border-t border-white/5 px-6">
+        <motion.h2 
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl lg:text-5xl font-serif text-white uppercase tracking-tight mb-8"
+        >
+            FROM SCRIPT TO SCREEN.
+        </motion.h2>
+        <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+        >
+            <button 
+                onClick={() => setIsModalOpen(true)}
+                className="px-8 py-4 bg-[#00AEEF] text-white font-extrabold text-xs tracking-[0.2em] uppercase hover:bg-[#009ED8] hover:shadow-[0_0_20px_rgba(0,174,239,0.2)] transition-all duration-300 rounded-sm border-none"
+            >
+                GET A QUOTE
+            </button>
+        </motion.div>
+      </section>
 
-            {/* --- SECTION 3: Story (Asymmetric) --- */}
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-16 px-12 mt-32 items-center">
-
-                <motion.div
-                    initial={{ opacity: 0, x: -60 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.25 }}
-                    transition={{ duration: 1, ease: 'easeOut' as const }}
-                    className="h-[80vh] overflow-hidden rounded-sm shadow-xl"
-                >
-                    <img
-                        src="/images/about.us.jpeg"
-                        alt="About Dreamaker Productions"
-                        className="w-full h-full object-cover"
-                    />
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, x: 60 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.25 }}
-                    transition={{ duration: 1, ease: 'easeOut' as const, delay: 0.15 }}
-                    className="py-8"
-                >
-                    <p className="font-borscha text-sm tracking-[0.4em] uppercase text-black/40 mb-6">
-                        Our Legacy
-                    </p>
-                    <p className="font-borscha text-3xl md:text-4xl leading-relaxed font-bold">
-                        Dreamaker Productions is the definitive gateway to international filmmaking in Morocco.
-                    </p>
-                    <div className="w-12 h-px bg-black/20 my-8" />
-                    <p className="text-black/50 text-base md:text-lg leading-relaxed max-w-md">
-                        We blend local mastery with uncompromising global standards — delivering
-                        cinematic worlds that resonate far beyond the screen.
-                    </p>
-
-                    <div className="mt-16 space-y-6">
-                        {[
-                            "Morocco's premier international production partner",
-                            'Full-service studio & location scouting',
-                            'In-house costume, armor & props department',
-                        ].map((item, i) => (
-                            <motion.div
-                                key={item}
-                                initial={{ opacity: 0, x: 20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: 0.3 + i * 0.1, ease: 'easeOut' as const }}
-                                className="flex items-start gap-4"
-                            >
-                                <span className="mt-1 w-1.5 h-1.5 rounded-full bg-black flex-shrink-0" />
-                                <span className="font-borscha text-sm tracking-widest uppercase text-black/60">
-                                    {item}
-                                </span>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                    <motion.a
-                        href="/contact"
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' as const }}
-                        className="inline-block mt-14 font-borscha uppercase tracking-[0.35em] text-sm border border-black/30 px-12 py-4 hover:bg-black hover:text-white transition-all duration-300"
-                    >
-                        Work With Us
-                    </motion.a>
-                </motion.div>
-
-            </section>
-
-        </main>
-    )
+      <QuoteModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <Footer />
+    </main>
+  );
 }

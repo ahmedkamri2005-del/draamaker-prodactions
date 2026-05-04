@@ -84,7 +84,7 @@ export default function WorkPage() {
                 <motion.h1
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
+                    transition={{ duration: 1, delay: 0.2, ease: 'easeOut' as const }}
                     className="font-borscha text-5xl md:text-7xl font-black uppercase tracking-tight"
                 >
                     Our Work

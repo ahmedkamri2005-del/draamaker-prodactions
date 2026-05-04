@@ -1,414 +1,385 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import BackHome from '../../components/ui/BackHome'
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import Image from 'next/image';
+import Masonry from 'react-masonry-css';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Footer from '../../components/layout/Footer';
 
-/* ─────────────────────────── Asset lists ─────────────────────────── */
-
-const studioImages = [
-    '/studios/DSC00506-1-1024x689.jpg',
-    '/studios/DSC00c511-1-1024x683.png',
-    '/studios/DSC01172-1024x683.jpg',
-    '/studios/DSC01173-1024x683.jpg',
-    '/studios/DSC01174-1024x683.jpg',
-    '/studios/DSC01201-1024x683.jpg',
-    '/studios/WhatsApp-Image-2024-01-27-at-15.34.20.jpeg',
-    '/studios/WhatsApp-Image-2024-01-27-at-15.34.21-3-1024x779.jpeg',
-    '/studios/WhatsApp-Image-2024-01-27-at-15.35.18-1-e1738861424497-1024x586.jpeg',
-    '/studios/WhatsApp-Image-2024-01-27-at-15.35.19-1-1024x768.jpeg',
-    '/studios/WhatsApp-Image-2024-01-27-at-15.38.41-1024x768.jpeg',
-    '/studios/WhatsApp-Image-2024-01-27-at-15.38.49-1-1024x574.jpeg',
-    '/studios/WhatsApp-Image-2024-01-27-at-15.39.43-1-1-1024x768.jpeg',
-]
-
-// Each entry: [src, colSpan, rowSpan]  → creates the irregular masonry feel
-const masonryLayout: [string, string, string][] = [
-    [studioImages[0], 'col-span-2', 'row-span-2'],
-    [studioImages[1], 'col-span-1', 'row-span-1'],
-    [studioImages[2], 'col-span-1', 'row-span-1'],
-    [studioImages[3], 'col-span-1', 'row-span-2'],
-    [studioImages[4], 'col-span-2', 'row-span-1'],
-    [studioImages[5], 'col-span-1', 'row-span-1'],
-    [studioImages[6], 'col-span-2', 'row-span-1'],
-    [studioImages[7], 'col-span-1', 'row-span-2'],
-    [studioImages[8], 'col-span-1', 'row-span-1'],
-    [studioImages[9], 'col-span-2', 'row-span-1'],
-    [studioImages[10], 'col-span-1', 'row-span-1'],
-    [studioImages[11], 'col-span-1', 'row-span-1'],
-    [studioImages[12], 'col-span-2', 'row-span-1'],
-]
-
-const costumeImages = [
-    '/armor/costume-01.png', '/armor/costume-02.png', '/armor/costume-03.png',
-    '/armor/costume-04.png', '/armor/costume-05.png', '/armor/costume-06.png',
-    '/armor/costume-07.png', '/armor/costume-08.png', '/armor/costume-09.png',
-    '/armor/costume-11.png', '/armor/costume-13.png', '/armor/costume-15.png',
-    '/armor/costume-16.png', '/armor/costume-17.png', '/armor/costume-18.png',
-    '/armor/costume-19.png', '/armor/costume-23.png',
-]
-
-const armorImages = [
-    '/armor/armor-01.png', '/armor/armor-05.png', '/armor/armor-06.png',
-    '/armor/armor-08.png', '/armor/armor-11.png', '/armor/armor-14.png',
-    '/armor/armor-15.png', '/armor/armor-16.png', '/armor/armor-19.png',
-    '/armor/armor-25.png',
-]
-
-const studioVideos = [
-    { title: "DREAMAKER SHOWREEL", src: "/videos/showreel.mp4" },
-    { title: "DIRTY ANGELS - BTS", src: "/videos/dirty.angel.mp4" },
-    { title: "STUDIO OPERATIONS", src: "/videos/video1.webm" }
+// --- Types & Data ---
+const HERO_IMAGES = [
+  '/pics.of.dmp/home/Studios.&.Built.Environments.webp',
+  '/all pic/Atlas Studios/IMG_6681.JPG',
+  '/all pic/Egyptian Sets/DSCN5380.JPG',
+  '/all pic/Jerusalem set/IMG_0150.jpg'
 ];
 
-/* ─────────────────────────── Infinite Marquee ─────────────────────── */
-// Duplicates items 3× so the loop is seamless at any screen width
+const FACILITIES = [
+  {
+    title: "High-Tech Soundstages",
+    text: "We provide access to state-of-the-art facilities trusted by global networks and streaming giants. Featuring fully equipped green screen soundstages, specialized production workshops, and versatile spaces, we offer an uncompromising technical environment for blockbusters of any scale.",
+    images: [
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s1.webp',
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s2.webp',
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s3.webp',
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s4.webp',
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s5.webp',
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s6.webp',
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s7.webp',
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s8.webp',
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s9.webp',
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s10.webp',
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s11.webp',
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s12.webp',
+      '/Backlots & Sound Stages/studio/High-Tech Soundstages/h.t.s13.webp'
+    ]
+  },
+  {
+    title: "Legendary Desert Studios",
+    text: "We facilitate shoots in some of the most iconic film infrastructures globally. Nestled in authentic desert landscapes, these vast environments provide a massive, controlled footprint for your production, offering seamless logistical support for massive crew sizes.",
+    images: [
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d1.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d2.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d3.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d4.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d5.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d6.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d7.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d8.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d9.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d11.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d12.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d13.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d14.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d15.webp',
+      '/Backlots & Sound Stages/studio/Legendary.Desert.Studios/l.d16.webp'
+    ]
+  },
+  {
+    title: "Integrated Production Hubs",
+    text: "We offer access to world-class production environments built to exact international standards. These comprehensive hubs include dedicated projection rooms, extensive backlots, and full operational support for major studio features, allowing for a seamless workflow.",
+    images: [
+      '/Backlots & Sound Stages/studio/Integrated Production Hubs/oasis.webp',
+      '/Backlots & Sound Stages/studio/Integrated Production Hubs/oasis1.webp',
+      '/Backlots & Sound Stages/studio/Integrated Production Hubs/oasis2.webp',
+      '/Backlots & Sound Stages/studio/Integrated Production Hubs/oasis3.webp',
+      '/Backlots & Sound Stages/studio/Integrated Production Hubs/oasis4.webp',
+      '/Backlots & Sound Stages/studio/Integrated Production Hubs/oasis7.webp',
+      '/Backlots & Sound Stages/studio/Integrated Production Hubs/oasis8.webp'
+    ]
+  }
+];
 
-function InfiniteMarquee({
-    images,
-    speed = 40,
-    direction = 'left',
-}: {
-    images: string[]
-    speed?: number
-    direction?: 'left' | 'right'
-}) {
-    // Use a plain CSS animation for silky, no-jank infinite scroll
-    const keyframesName = direction === 'left' ? 'marquee-left' : 'marquee-right'
+const BACKLOTS = [
+  {
+    id: 'roman',
+    label: "Classical & Roman",
+    desc: "A majestic reconstruction of classical architecture. From grand amphitheatres to patrician villas, ready for epic narratives.",
+    images: [
+      '/Backlots & Sound Stages/sets/clasical.roman/roman1.webp',
+      '/Backlots & Sound Stages/sets/clasical.roman/roman2.webp',
+      '/Backlots & Sound Stages/sets/clasical.roman/roman3.webp',
+      '/Backlots & Sound Stages/sets/clasical.roman/roman4.webp',
+      '/Backlots & Sound Stages/sets/clasical.roman/roman5.webp',
+      '/Backlots & Sound Stages/sets/clasical.roman/roman7.webp',
+      '/Backlots & Sound Stages/sets/clasical.roman/roman8.webp',
+      '/Backlots & Sound Stages/sets/clasical.roman/roman9.webp',
+      '/Backlots & Sound Stages/sets/clasical.roman/roman10.webp',
+      '/Backlots & Sound Stages/sets/clasical.roman/roman11.webp',
+      '/Backlots & Sound Stages/sets/clasical.roman/roman12.webp',
+      '/Backlots & Sound Stages/sets/clasical.roman/roman13.webp',
+      '/Backlots & Sound Stages/sets/clasical.roman/roman14.webp'
+    ]
+  },
+  {
+    id: 'middle-eastern',
+    label: "Middle Eastern & Biblical",
+    desc: "Incredibly detailed ancient cities. Authentic stone facades and grand plazas perfect for historical blockbusters.",
+    images: [
+      '/Backlots & Sound Stages/sets/Middle Eastern.Biblical/j.r1.webp',
+      '/Backlots & Sound Stages/sets/Middle Eastern.Biblical/j.r2.webp',
+      '/Backlots & Sound Stages/sets/Middle Eastern.Biblical/j.r3.webp',
+      '/Backlots & Sound Stages/sets/Middle Eastern.Biblical/j.r4.webp',
+      '/Backlots & Sound Stages/sets/Middle Eastern.Biblical/j.r7.webp',
+      '/Backlots & Sound Stages/sets/Middle Eastern.Biblical/j.r8.webp',
+      '/Backlots & Sound Stages/sets/Middle Eastern.Biblical/j.r9.webp',
+      '/Backlots & Sound Stages/sets/Middle Eastern.Biblical/j.r10.webp',
+      '/Backlots & Sound Stages/sets/Middle Eastern.Biblical/j.r11.webp',
+      '/Backlots & Sound Stages/sets/Middle Eastern.Biblical/j.r12.webp',
+      '/Backlots & Sound Stages/sets/Middle Eastern.Biblical/j.r13.webp',
+      '/Backlots & Sound Stages/sets/Middle Eastern.Biblical/j.r14.webp'
+    ]
+  },
+  {
+    id: 'egyptian',
+    label: "Ancient Egyptian",
+    desc: "Step back to the era of pharaohs. Towering columns, monumental statues, and intricate hieroglyphic details.",
+    images: [
+      '/Backlots & Sound Stages/sets/Ancient Egyptian/egy1.webp',
+      '/Backlots & Sound Stages/sets/Ancient Egyptian/egy2.webp',
+      '/Backlots & Sound Stages/sets/Ancient Egyptian/egy3.webp',
+      '/Backlots & Sound Stages/sets/Ancient Egyptian/egy4.webp',
+      '/Backlots & Sound Stages/sets/Ancient Egyptian/egy7.webp',
+      '/Backlots & Sound Stages/sets/Ancient Egyptian/egy8.webp',
+      '/Backlots & Sound Stages/sets/Ancient Egyptian/egy9.webp',
+      '/Backlots & Sound Stages/sets/Ancient Egyptian/egy10.webp',
+      '/Backlots & Sound Stages/sets/Ancient Egyptian/egy11.webp',
+      '/Backlots & Sound Stages/sets/Ancient Egyptian/egy12.webp'
+    ]
+  },
+  {
+    id: 'fabrication',
+    label: "Custom Fabrication",
+    desc: "Access specialized, highly-controlled indoor workshops tailored for intricate prop-building and custom set construction.",
+    images: [
+      '/Backlots & Sound Stages/sets/Custom Fabrication/art.webp',
+      '/Backlots & Sound Stages/sets/Custom Fabrication/art1.webp',
+      '/Backlots & Sound Stages/sets/Custom Fabrication/art2.webp',
+      '/Backlots & Sound Stages/sets/Custom Fabrication/art3.webp',
+      '/Backlots & Sound Stages/sets/Custom Fabrication/art4.webp',
+      '/Backlots & Sound Stages/sets/Custom Fabrication/art7.webp',
+      '/Backlots & Sound Stages/sets/Custom Fabrication/art8.webp',
+      '/Backlots & Sound Stages/sets/Custom Fabrication/art9.webp',
+      '/Backlots & Sound Stages/sets/Custom Fabrication/art10.webp',
+      '/Backlots & Sound Stages/sets/Custom Fabrication/art11.webp'
+    ]
+  }
+];
 
-    // Duplicate to fill enough width
-    const track = [...images, ...images, ...images]
+// --- Components ---
 
-    return (
-        <div className="overflow-hidden w-full">
-            <div
-                className="flex gap-6 w-max"
-                style={{
-                    animation: `${keyframesName} ${images.length * (60 / speed)}s linear infinite`,
-                }}
-            >
-                {track.map((src, i) => (
-                    <div
-                        key={i}
-                        className="h-72 w-48 flex-shrink-0 relative group"
-                    >
-                        <img
-                            src={src}
-                            alt=""
-                            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_0_18px_rgba(255,255,255,0.15)]"
-                        />
-                    </div>
-                ))}
-            </div>
-        </div>
-    )
-}
+const HeroSlideshow = () => {
+  const [index, setIndex] = useState(0);
 
-/* ─────────────────────────── Fade-in reveal ─────────────────────────*/
-const fadeUp = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.9, ease: 'easeOut' as const },
-    },
-}
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
 
-/* ─────────────────────────── Page ───────────────────────────────────*/
+  return (
+    <div className="absolute inset-0 z-0">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 2, ease: "easeInOut" as const }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={HERO_IMAGES[index]}
+            alt="Studios Hero"
+            fill
+            className="object-cover"
+            priority
+          />
+        </motion.div>
+      </AnimatePresence>
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 z-10" />
+    </div>
+  );
+};
+
+const ImageCarousel = ({ images }: { images: string[] }) => {
+  const [current, setCurrent] = useState(0);
+
+  const next = () => setCurrent((prev) => (prev + 1) % images.length);
+  const prev = () => setCurrent((prev) => (prev - 1 + images.length) % images.length);
+
+  return (
+    <div className="relative w-full aspect-[16/10] overflow-hidden rounded-sm group bg-zinc-900">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.6 }}
+          className="absolute inset-0"
+        >
+          <Image src={images[current]} alt="Facility" fill className="object-cover" />
+        </motion.div>
+      </AnimatePresence>
+      
+      {/* Controls */}
+      <div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+        <button onClick={prev} className="p-2 bg-black/50 backdrop-blur-md text-white hover:bg-[#00AEEF] transition-colors rounded-full">
+          <ChevronLeft size={20} />
+        </button>
+        <button onClick={next} className="p-2 bg-black/50 backdrop-blur-md text-white hover:bg-[#00AEEF] transition-colors rounded-full">
+          <ChevronRight size={20} />
+        </button>
+      </div>
+
+      {/* Dots */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        {images.map((_, i) => (
+          <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all ${i === current ? 'bg-[#00AEEF] w-4' : 'bg-white/30'}`} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export default function StudiosPage() {
-    const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState(BACKLOTS[0]);
 
-    return (
-        <>
-            {/* Inject keyframe animations globally for this page */}
-            <style>{`
-                @keyframes marquee-left {
-                    0%   { transform: translateX(0); }
-                    100% { transform: translateX(-33.333%); }
-                }
-                @keyframes marquee-right {
-                    0%   { transform: translateX(-33.333%); }
-                    100% { transform: translateX(0); }
-                }
-            `}</style>
+  return (
+    <main className="bg-black text-zinc-400 min-h-screen font-sans selection:bg-[#00AEEF] selection:text-white overflow-x-hidden">
+      
+      {/* ── BACK LINK ──────────────────────────────────────────────────── */}
+      <Link
+        href="/"
+        className="fixed top-24 md:top-32 left-6 md:left-12 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-white/50 hover:text-white hover:-translate-x-2 transition-all duration-300 z-50 mix-blend-difference"
+      >
+        <span>&larr;</span> Back to Home
+      </Link>
 
-            <main className="bg-black text-white overflow-x-hidden">
-                <BackHome />
+      {/* ── 01. HERO SECTION ───────────────────────────────────────────── */}
+      <section className="relative h-screen w-full flex flex-col justify-end items-center text-center px-6 pb-32 md:pb-52 overflow-hidden">
+        <HeroSlideshow />
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: "easeOut" as const }}
+          className="relative z-20 max-w-6xl"
+        >
+          <span className="text-[#00AEEF] text-[10px] md:text-xs tracking-[0.6em] uppercase font-bold mb-8 block">
+            Scale & Infrastructure
+          </span>
+          <h1 className="text-4xl md:text-7xl lg:text-8xl font-serif text-white uppercase leading-[0.9] tracking-tighter">
+            World-Class Scale <br />
+            <span className="italic font-medium">& Infrastructure</span>
+          </h1>
+        </motion.div>
+      </section>
 
-                {/* ══════════════════════════════════════
-                    SECTION 1 — Full-screen Hero Video
-                ══════════════════════════════════════ */}
-                <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
-
-                    <video
-                        src="/studios/studio.webm"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="absolute inset-0 w-full h-full object-cover z-0"
-                    />
-
-                    {/* Dark vignette + bottom gradient */}
-                    <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-transparent to-black" />
-
-                    {/* Hero title */}
-                    <motion.h1
-                        initial={{ opacity: 0, letterSpacing: '0.6em' }}
-                        animate={{ opacity: 1, letterSpacing: '0.25em' }}
-                        transition={{ duration: 1.6, ease: 'easeOut', delay: 0.3 }}
-                        className="relative z-20 font-borscha text-5xl md:text-8xl font-bold uppercase text-white text-center tracking-[0.25em] drop-shadow-2xl"
-                    >
-                        MARRAKECH<br />STUDIOS
-                    </motion.h1>
-
-                    {/* Subtle scroll hint */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 2, duration: 1 }}
-                        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
-                    >
-                        <span className="font-borscha text-xs tracking-[0.3em] text-white/60 uppercase">Scroll</span>
-                        <motion.div
-                            animate={{ y: [0, 10, 0] }}
-                            transition={{ repeat: Infinity, duration: 1.5 }}
-                            className="w-px h-10 bg-gradient-to-b from-white/60 to-transparent"
-                        />
-                    </motion.div>
-                </section>
-
-
-                {/* ══════════════════════════════════════
-                    SECTION 2 — Story / Description
-                ══════════════════════════════════════ */}
-                <section className="relative py-32 px-6 md:px-24 max-w-5xl mx-auto">
-                    <motion.div
-                        variants={fadeUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: '-100px' }}
-                    >
-                        <p className="font-borscha text-xs tracking-[0.4em] uppercase text-white/40 mb-6">
-                            Marrakech, Morocco
-                        </p>
-                        <h2 className="font-borscha text-4xl md:text-6xl font-bold uppercase leading-tight mb-10 tracking-wider">
-                            The Ultimate<br />Filming Destination
-                        </h2>
-                    </motion.div>
-
-                    <motion.div
-                        variants={fadeUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: '-80px' }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        <p className="text-white/70 text-lg md:text-xl leading-relaxed max-w-3xl">
-                            Nestled in the heart of Morocco, Marrakech Studios is a world-class production
-                            facility designed for international film, television, and commercial productions.
-                            With over 3,000 m² of stage space, a dedicated costume and armor department,
-                            and an unparalleled creative infrastructure, we offer everything your production demands —
-                            under one roof, in one of the world's most visually extraordinary countries.
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        variants={fadeUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: '-60px' }}
-                        className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-white/10 pt-12"
-                    >
-                        {[
-                            { stat: '3,000 m²', label: 'Stage Space' },
-                            { stat: '500+', label: 'Costume Pieces' },
-                            { stat: '15+', label: 'Years of Production' },
-                        ].map(({ stat, label }) => (
-                            <div key={label}>
-                                <p className="font-borscha text-5xl font-bold text-white">{stat}</p>
-                                <p className="font-borscha text-sm tracking-[0.3em] uppercase text-white/40 mt-2">{label}</p>
-                            </div>
-                        ))}
-                    </motion.div>
-                </section>
-
-
-                {/* ══════════════════════════════════════
-                    SECTION 3 — Masonry Gallery
-                ══════════════════════════════════════ */}
-                <section className="py-8 px-4 md:px-8">
-                    <motion.p
-                        variants={fadeUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        className="font-borscha text-xs tracking-[0.5em] uppercase text-white/30 mb-8 text-center"
-                    >
-                        The Space
-                    </motion.p>
-
-                    <div
-                        className="grid gap-3 auto-rows-[180px] md:auto-rows-[200px]"
-                        style={{ gridTemplateColumns: 'repeat(4, minmax(0, 1fr))' }}
-                    >
-                        {masonryLayout.map(([src, colSpan, rowSpan], i) => (
-                            <motion.div
-                                key={i}
-                                className={`${colSpan} ${rowSpan} overflow-hidden`}
-                                initial={{ opacity: 0, scale: 0.97 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true, margin: '-40px' }}
-                                transition={{ duration: 0.6, delay: i * 0.04 }}
-                            >
-                                <img
-                                    src={src}
-                                    alt=""
-                                    className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
-                                />
-                            </motion.div>
-                        ))}
-                    </div>
-                </section>
-
-
-                {/* ══════════════════════════════════════
-                    SECTION 4 — Costumes & Armor Marquees
-                ══════════════════════════════════════ */}
-                <section className="py-24 overflow-hidden">
-                    <motion.div
-                        variants={fadeUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        className="text-center mb-16 px-6"
-                    >
-                        <p className="font-borscha text-xs tracking-[0.5em] uppercase text-white/30 mb-3">Department</p>
-                        <h2 className="font-borscha text-4xl md:text-6xl font-bold uppercase tracking-wider">
-                            Costumes &amp; Armor
-                        </h2>
-                        <p className="text-white/50 mt-6 max-w-xl mx-auto text-base">
-                            An in-house wardrobe spanning centuries of cinema history — from ancient empires to
-                            contemporary drama.
-                        </p>
-                    </motion.div>
-
-                    {/* Ribbon 1 — Costumes (moves left) */}
-                    <div className="mb-6">
-                        <InfiniteMarquee images={costumeImages} speed={35} direction="left" />
-                    </div>
-
-                    {/* Ribbon 2 — Armor (moves right) */}
-                    <div>
-                        <InfiniteMarquee images={armorImages} speed={28} direction="right" />
-                    </div>
-                </section>
-
-
-                {/* ══════════════════════════════════════
-                    SECTION 5 — Video Gallery
-                ══════════════════════════════════════ */}
-                <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
-                        {studioVideos.map((video, i) => (
-                            <motion.div
-                                key={i}
-                                variants={fadeUp}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true, margin: '-50px' }}
-                                transition={{ delay: i * 0.15 }}
-                                className="flex flex-col gap-4"
-                            >
-                                <div
-                                    className="w-full aspect-video rounded-xl overflow-hidden bg-white/5 relative group cursor-pointer"
-                                    onClick={() => setActiveVideo(video.src)}
-                                >
-                                    <video
-                                        src={video.src}
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-100 md:opacity-80 md:group-hover:opacity-100"
-                                    />
-                                    {/* Play button overlay */}
-                                    <div className="absolute inset-0 flex items-center justify-center z-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 bg-black/30">
-                                        <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center pl-1">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                                                <path d="M5 3l14 9-14 9V3z" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p className="font-borscha text-sm tracking-[0.2em] font-bold text-white uppercase text-center mt-2">
-                                    {video.title}
-                                </p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* ══════════════════════════════════════
-                    FOOTER CTA
-                ══════════════════════════════════════ */}
-                <section className="py-32 flex flex-col items-center justify-center border-t border-white/10 px-6 text-center">
-                    <motion.h2
-                        variants={fadeUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        className="font-borscha text-4xl md:text-6xl font-bold uppercase tracking-wider mb-8"
-                    >
-                        Book the Studio
-                    </motion.h2>
-                    <motion.p
-                        variants={fadeUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        className="text-white/50 text-lg max-w-lg mb-12"
-                    >
-                        Let&apos;s bring your vision to life. Reach out to our production team and
-                        we&apos;ll craft the perfect setup for your project.
-                    </motion.p>
-                    <motion.a
-                        href="/contact"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="font-borscha uppercase tracking-[0.3em] text-sm border border-white/40 px-12 py-5 hover:bg-white hover:text-black transition-all duration-300"
-                    >
-                        Get in Touch
-                    </motion.a>
-                </section>
-
-            </main>
-
-            {/* Cinematic Modal */}
-            {activeVideo && (
-                <div
-                    className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
-                    onClick={() => setActiveVideo(null)}
-                >
-                    <button
-                        className="absolute top-8 right-8 md:right-12 text-white hover:text-gray-400 z-[101] flex items-center gap-2 font-borscha text-sm font-bold tracking-widest cursor-pointer group"
-                        onClick={() => setActiveVideo(null)}
-                    >
-                        CLOSE <span className="group-hover:rotate-90 transition-transform duration-300 ml-1">X</span>
-                    </button>
-
-                    <div className="relative w-full max-w-6xl aspect-video rounded-xl overflow-hidden shadow-[0_0_100px_rgba(255,255,255,0.05)] border border-white/10" onClick={(e) => e.stopPropagation()}>
-                        <video
-                            src={activeVideo}
-                            controls
-                            autoPlay
-                            className="w-full h-full bg-black shadow-2xl"
-                        ></video>
-                    </div>
+      {/* ── 02. SECTION: SOUNDSTAGES & FACILITIES ────────────────────── */}
+      <section className="py-24 md:py-48 bg-zinc-950">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="space-y-24 md:space-y-48">
+            {FACILITIES.map((fac, idx) => (
+              <motion.div 
+                key={fac.title}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className={`flex flex-col ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-12 md:gap-24`}
+              >
+                <div className="w-full md:w-3/5">
+                  <ImageCarousel images={fac.images} />
                 </div>
-            )}
-        </>
-    )
+                <div className="w-full md:w-2/5 space-y-6">
+                  <h3 className="text-3xl md:text-5xl font-serif text-white uppercase tracking-tight italic">
+                    {fac.title}
+                  </h3>
+                  <div className="w-16 h-[1px] bg-[#00AEEF]" />
+                  <p className="text-zinc-400 text-lg leading-relaxed">
+                    {fac.text}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 03. ESTABLISHED BACKLOTS (TABBED GALLERY) ───────────────── */}
+      <section className="py-24 md:py-48 bg-black">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16 md:mb-24">
+            <span className="text-[#00AEEF] text-[10px] tracking-[0.5em] uppercase font-bold mb-4 block">Immersive Environments</span>
+            <h2 className="text-3xl md:text-6xl font-serif text-white uppercase tracking-tighter leading-none mb-12">
+              Established Backlots <br />
+              <span className="italic font-medium">& Standing Sets</span>
+            </h2>
+
+            {/* TABS */}
+            <div className="flex flex-wrap justify-center gap-4 md:gap-8 border-b border-white/10 pb-8">
+              {BACKLOTS.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab)}
+                  className={`text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 relative py-2 ${
+                    activeTab.id === tab.id ? 'text-[#00AEEF]' : 'text-zinc-500 hover:text-white'
+                  }`}
+                >
+                  {tab.label}
+                  {activeTab.id === tab.id && (
+                    <motion.div layoutId="tabLine" className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#00AEEF]" />
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* DYNAMIC CONTENT */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="space-y-12"
+            >
+              <div className="max-w-2xl mx-auto text-center">
+                <p className="text-zinc-400 text-lg md:text-xl leading-relaxed italic">
+                  "{activeTab.desc}"
+                </p>
+              </div>
+
+              <Masonry
+                breakpointCols={{ default: 3, 1100: 2, 700: 1 }}
+                className="flex w-auto -ml-6"
+                columnClassName="pl-6 bg-clip-padding space-y-6"
+              >
+                {activeTab.images.map((src, i) => (
+                  <motion.div
+                    key={src}
+                    whileHover={{ scale: 1.02 }}
+                    className="relative overflow-hidden rounded-sm bg-zinc-900 group"
+                  >
+                    <img src={src} alt={activeTab.label} className="w-full h-auto object-cover" />
+                  </motion.div>
+                ))}
+              </Masonry>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </section>
+
+      {/* ── 04. FOOTER CTA ────────────────────────────────────────────── */}
+      <section className="py-32 md:py-60 bg-zinc-950 flex flex-col items-center justify-center text-center px-6">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="max-w-4xl"
+        >
+          <span className="text-[#00AEEF] text-[10px] tracking-[0.5em] uppercase font-bold mb-8 block">Inquiry & Access</span>
+          <h2 className="text-4xl md:text-7xl font-serif text-white uppercase leading-[0.9] tracking-tighter mb-10">
+            Ready to build <br />
+            <span className="italic font-medium">Your World?</span>
+          </h2>
+          <p className="text-zinc-500 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+            Contact our management team to check stage availability, schedule a scout, or discuss your custom set construction needs.
+          </p>
+          <button onClick={() => window.dispatchEvent(new Event('openQuoteModal'))}
+            className="px-12 py-5 bg-[#00AEEF] text-white font-extrabold text-[11px] tracking-[0.3em] uppercase hover:bg-[#009ED8] hover:shadow-[0_0_30px_rgba(0,174,239,0.4)] transition-all duration-500 rounded-sm inline-block"
+          >
+            Contact Us For Availability
+          </button>
+        </motion.div>
+      </section>
+
+      <Footer />
+    </main>
+  );
 }

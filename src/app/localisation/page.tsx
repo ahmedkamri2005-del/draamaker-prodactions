@@ -4,14 +4,13 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 const localisations = [
-    { city: "MARRAKECH", img: "/locali/marrakeche1.jpg", desc: "The red city, where history meets luxury production." },
-    { city: "MERZOUGA", img: "/locali/merzouga.jpg", desc: "Infinite dunes and the most cinematic desert light in the world." },
-    { city: "FES", img: "/locali/fes3.jpg", desc: "The world's largest car-free urban area, a labyrinth of textures." },
-    { city: "OUARZAZATE", img: "/locali/ouarzazate-web.jpg", desc: "The Hollywood of Africa. Iconic studios and desert fortresses." },
-    { city: "CHEFCHAOUEN", img: "/locali/Chefchaouen.jpg", desc: "The blue pearl. Unique aesthetic for artistic storytelling." },
-    { city: "RABAT", img: "/locali/rabat-morocco.jpeg", desc: "Modern architectural marvels blended with royal history." },
-    { city: "ATLAS MOUNTAINS", img: "/locali/atlas-mountains-in-morocco.webp", desc: "Rugged peaks and authentic Berber villages." },
-    { city: "CASABLANCA", img: "/locali/casa.jpg", desc: "A mix of Art Deco legacy and futuristic urban vibes." }
+    { title: "Mountains", img: "/images/locations/atlas-mountains.jpg", desc: "Morocco is home to the stunning Atlas Mountains, located in the southwestern region of the country. With its highest peak Toubkal (4,167 km), it separates the Mediterranean and Atlantic coastlines from the Sahara Desert." },
+    { title: "Cities & Medinas", img: "/images/locations/medina.jpg", desc: "A medina is the old part of a town or city in Morocco, typically walled and containing narrow streets, fountains, palaces and mosques. Many Medina are car-free as there is not enough space in the alleyways." },
+    { title: "Kasbahs", img: "/images/locations/kasbah.jpg", desc: "A Kasbah is a type of medina or citadel in the central part of town, usually built out of clay. It is perfect for filming Biblical, Mesopotamia and Ancient Egyptian scenes." },
+    { title: "Desert & Oasis", img: "/images/locations/desert-oasis.jpg", desc: "Morocco offers breathtaking sand and harsh desert sceneries, it doubles from a lunar basaltic landscape to lush, sea like dunes changing colors from orange to gold everyday. An oasis is a fertile green area in a desert region created by a well or spring, offering refuge and relief in hot desert conditions as well as undeniably beautiful lush landscape." },
+    { title: "Sea & Coastlines", img: "/images/locations/sea-coastlines.jpg", desc: "Morocco borders the North Atlantic Ocean to the west and the west Mediterranean Sea to the north, with breathtaking coastline, stunning beaches, new and old ports." },
+    { title: "Gorges", img: "/images/locations/gorges.jpg", desc: "The Todgha Gorges are a series of limestone river canyons in the eastern part of the High Atlas Mountains near the town of Tinerhir. Both the Todgha and neighbouring Dades Rivers carved out these deep cliff-sided canyons with walls as high as 400 metres. During the dry season the canyon floor has, at the most, a small stream, making the wadi floor easily traversable." },
+    { title: "Roman Ruins", img: "/images/locations/roman-ruins.jpg", desc: "Visible from the nearby holy town of Moulay Idriss Zerhoune and from higher points throughout the valley, Volubilis is one of Morocco’s best-preserved Roman ruins, located between the imperial cities of Fez and Meknes on a fertile plain surrounded by wheat fields. Established before the Christian Era when it was part of Mauretania, Volubilis was the administrative center of the kingdom of Mauretania and one of the most remote cities within the Roman Empire, located in the far southwestern region." }
 ];
 
 export default function LocalisationPage() {
@@ -39,13 +38,13 @@ export default function LocalisationPage() {
                         <div className="relative w-full h-[40vh] md:h-[60vh] overflow-hidden group cursor-crosshair">
                             <img
                                 src={loc.img}
-                                alt={loc.city}
+                                alt={loc.title}
                                 className="w-full h-full object-cover grayscale-0 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105 transition-all duration-700 ease-in-out"
                             />
                         </div>
-                        <div className="mt-3 md:mt-6">
-                            <h2 className="font-bold text-4xl uppercase font-borscha tracking-tight">{loc.city}</h2>
-                            <p className="text-gray-600 mt-2 text-lg max-w-sm">{loc.desc}</p>
+                        <div className="mt-3 md:mt-6 flex flex-col">
+                            <h2 className="font-bold text-4xl uppercase font-borscha tracking-tight mb-4">{loc.title}</h2>
+                            <p className="text-gray-700 text-lg leading-relaxed max-w-3xl mb-8">{loc.desc}</p>
                         </div>
                     </div>
                 ))}
