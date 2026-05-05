@@ -14,11 +14,36 @@ export default function ContactClient() {
         projectType: '',
         message: '',
     })
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitted, setSubmitted] = useState(false)
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        setSubmitted(true)
+        setIsSubmitting(true)
+
+        try {
+            const res = await fetch('/api/quote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    service: formData.projectType,
+                    description: formData.message,
+                }),
+            })
+
+            if (res.ok) {
+                setSubmitted(true)
+            } else {
+                alert('Failed to send message. Please try again later.')
+            }
+        } catch (error) {
+            console.error('Contact form error:', error)
+            alert('An error occurred. Please try again.')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     const inputClass =
@@ -174,11 +199,12 @@ export default function ContactClient() {
                                 <motion.button
                                     id="contact-submit"
                                     type="submit"
+                                    disabled={isSubmitting}
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="bg-[#00AEEF] text-white px-8 py-3 w-fit uppercase text-[11px] font-black tracking-[0.3em] hover:bg-[#009ED8] hover:shadow-[0_0_20px_rgba(0,174,239,0.4)] transition-all duration-300 border-none rounded-sm"
+                                    className="bg-[#00AEEF] text-white px-8 py-3 w-fit uppercase text-[11px] font-black tracking-[0.3em] hover:bg-[#009ED8] hover:shadow-[0_0_20px_rgba(0,174,239,0.4)] transition-all duration-300 border-none rounded-sm disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                    Send Message
+                                    {isSubmitting ? 'Sending...' : 'Send Message'}
                                 </motion.button>
                             </form>
                         </>

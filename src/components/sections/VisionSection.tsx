@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 
 /* ─── Data ─── */
 const capabilities = [
@@ -117,10 +118,11 @@ const VisionSection = () => {
                                     viewport={{ once: true, margin: '-80px' }}
                                     className="relative aspect-video lg:aspect-[4/3] max-h-[45vh] overflow-hidden group rounded-sm shadow-xl mx-auto lg:mx-0"
                                 >
-                                    <img
+                                    <Image
                                         src="/pics.of.dmp/home/our.vesion.webp"
                                         alt="Behind the scenes — Dreamaker Productions on set"
-                                        className="w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
+                                        fill
+                                        className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
                                     />
                                     {/* Subtle gradient overlay removed at user request */}
                                     <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-[#00AEEF]/40 via-[#00AEEF]/20 to-transparent" />
@@ -213,10 +215,11 @@ const VisionSection = () => {
                                 <div className="relative flex flex-col h-full overflow-hidden rounded-sm bg-zinc-900/50 border border-white/[0.04] transition-all duration-500 hover:border-[#00AEEF]/20 hover:bg-zinc-900/80">
                                     {/* Image */}
                                     <div className="relative aspect-video overflow-hidden">
-                                        <img
+                                        <Image
                                             src={item.image}
                                             alt={item.title}
-                                            className="w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
+                                            fill
+                                            className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
                                         />
 
 

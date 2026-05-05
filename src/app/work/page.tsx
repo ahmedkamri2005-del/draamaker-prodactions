@@ -1,7 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
+import Image from 'next/image'
 import BackHome from '../../components/ui/BackHome'
 
 const movies = [
@@ -48,10 +49,12 @@ export default function WorkPage() {
                         {displayLogos.map((logo, i) => {
                             const isColored = logo === '/clients/9.png'
                             return (
-                                <img
+                                <Image
                                     key={`${row}-${i}`}
                                     src={logo}
-                                    alt="brand"
+                                    alt={`${logo.split('/').pop()?.split('.')[0]} partner logo`}
+                                    width={120}
+                                    height={56}
                                     className={`h-12 md:h-14 w-auto object-contain mx-8 opacity-5 ${isColored ? '' : 'brightness-0 invert'}`}
                                 />
                             )
@@ -106,9 +109,11 @@ export default function WorkPage() {
                         >
                             {/* Poster */}
                             <div className="w-full md:w-1/2 flex justify-center items-center p-4">
-                                <img
+                                <Image
                                     src={`/works/${movie.file}`}
-                                    alt={movie.title}
+                                    alt={`${movie.title} movie poster`}
+                                    width={500}
+                                    height={750}
                                     className="w-full h-auto max-h-[75vh] object-contain drop-shadow-2xl rounded-md"
                                 />
                             </div>
@@ -144,28 +149,38 @@ export default function WorkPage() {
             <div className="h-24" />
 
             {/* Video Modal */}
-            {activeTrailer && (
-                <div
-                    className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center cursor-pointer"
-                    onClick={() => setActiveTrailer(null)}
-                >
-                    <button className="absolute top-8 right-8 md:right-12 text-white hover:text-gray-400 z-[101] flex items-center gap-2 font-bold tracking-widest cursor-pointer">
-                        CLOSE X
-                    </button>
-
-                    <div
-                        className="relative w-full max-w-5xl aspect-video rounded-xl overflow-hidden shadow-2xl"
-                        onClick={(e) => e.stopPropagation()}
+            <AnimatePresence>
+                {activeTrailer && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center cursor-pointer"
+                        onClick={() => setActiveTrailer(null)}
                     >
-                        <iframe
-                            src={activeTrailer}
-                            className="w-full h-full border-0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        ></iframe>
-                    </div>
-                </div>
-            )}
+                        <button className="absolute top-8 right-8 md:right-12 text-white hover:text-gray-400 z-[101] flex items-center gap-2 font-bold tracking-widest cursor-pointer">
+                            CLOSE X
+                        </button>
+
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            transition={{ duration: 0.3, delay: 0.1 }}
+                            className="relative w-full max-w-5xl aspect-video rounded-xl overflow-hidden shadow-2xl"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <iframe
+                                src={activeTrailer}
+                                className="w-full h-full border-0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
         </main>
     )

@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-export const dynamic = 'force-dynamic';
-
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -15,14 +13,14 @@ export async function POST(request: Request) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'ahmed.kamri2005@gmail.com',
-        pass: 'yxoykerimfjwavuq',
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
       },
     });
 
     const mailOptions = {
-      from: 'ahmed.kamri2005@gmail.com',
-      to: 'ahmed.kamri2005@gmail.com',
+      from: process.env.GMAIL_USER,
+      to: process.env.GMAIL_USER,
       replyTo: email,
       subject: `🎬 New Production Inquiry from ${name}`,
       html: `
@@ -47,9 +45,7 @@ export async function POST(request: Request) {
       `,
     };
 
-    console.log("Attempting to send email...");
     await transporter.sendMail(mailOptions);
-    console.log("Email sent successfully!");
 
     return NextResponse.json({ success: true });
   } catch (error) {

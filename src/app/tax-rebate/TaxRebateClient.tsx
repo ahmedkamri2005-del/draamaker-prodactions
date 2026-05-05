@@ -17,9 +17,9 @@ const stagger = {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const eligibleProjects = [
-  'Feature-length films',
+  'Feature films',
   'Television series & TV films',
-  'Docufictions & documentaries',
+  'Docu-fictions',
   'Long-form fiction for streaming & internet',
 ];
 
@@ -42,7 +42,7 @@ const processSteps = [
   {
     number: '04',
     title: 'REIMBURSEMENT',
-    text: 'Once final audited accounts are approved, the 20% cash rebate is typically disbursed within 6 months.',
+    text: 'Once final audited accounts are approved, the 30% cash rebate is typically disbursed within 6 months.',
   },
 ];
 
@@ -80,7 +80,7 @@ export default function TaxRebateClient() {
       {/* ═══════════════════════════════════════════════════════════════════════
           01. HERO SECTION
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative h-screen min-h-[100dvh] flex flex-col justify-center items-center text-center px-6 pt-20 overflow-hidden">
+      <section className="relative min-h-[50vh] flex flex-col justify-center items-center text-center px-6 pt-44 pb-32 overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0 bg-black z-0" />
         <div
@@ -112,7 +112,7 @@ export default function TaxRebateClient() {
             transition={{ duration: 1, ease: 'easeOut' as const }}
             className="text-5xl md:text-6xl lg:text-8xl font-serif text-white tracking-widest uppercase leading-none mb-8"
           >
-            20%
+            30%
             <br />
             <span className="text-4xl md:text-5xl lg:text-7xl italic font-medium tracking-[0.1em]">
               CASH REBATE
@@ -125,7 +125,7 @@ export default function TaxRebateClient() {
             className="text-base md:text-lg text-[#00AEEF] max-w-2xl mx-auto mt-6 leading-relaxed font-medium"
           >
             Maximize your production value. The Kingdom of Morocco offers a highly
-            competitive 20% cash rebate on eligible local spend.
+            competitive 30% cash rebate on eligible local spend.
           </motion.p>
 
           {/* Decorative divider */}

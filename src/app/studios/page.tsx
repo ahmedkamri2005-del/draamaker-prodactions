@@ -241,7 +241,7 @@ export default function StudiosPage() {
       </Link>
 
       {/* ── 01. HERO SECTION ───────────────────────────────────────────── */}
-      <section className="relative h-screen min-h-[100dvh] w-full flex flex-col justify-center items-center text-center px-6 pt-20 overflow-hidden">
+      <section className="relative h-screen w-full flex flex-col justify-end items-center text-center px-6 pb-32 md:pb-52 overflow-hidden">
         <HeroSlideshow />
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
@@ -346,7 +346,7 @@ export default function StudiosPage() {
                     whileHover={{ scale: 1.02 }}
                     className="relative overflow-hidden rounded-sm bg-zinc-900 group"
                   >
-                    <img src={src} alt={activeTab.label} className="w-full h-auto object-cover" />
+                    <Image src={src} alt={`${activeTab.label} backlot set`} width={600} height={400} className="w-full h-auto object-cover" />
                   </motion.div>
                 ))}
               </Masonry>

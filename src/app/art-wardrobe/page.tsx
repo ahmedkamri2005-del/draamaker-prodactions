@@ -230,7 +230,7 @@ export default function ArtWardrobePage() {
       </Link>
 
       {/* 1. HERO SECTION */}
-      <section className="relative h-screen w-full flex flex-col justify-end items-center text-center px-6 pb-16 md:pb-24 overflow-hidden">
+      <section className="relative min-h-screen w-full flex flex-col justify-end items-center text-center px-6 pb-16 md:pb-24 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -272,7 +272,7 @@ export default function ArtWardrobePage() {
               key={category.id} 
               className={`w-full flex flex-col-reverse ${
                 isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
-              } items-stretch bg-[#F4F4F0] h-screen`}
+              } items-stretch bg-[#F4F4F0] min-h-screen lg:h-screen`}
             >
               {/* Image Side */}
               <div className="w-full lg:w-1/2 h-[60vh] lg:h-full relative overflow-hidden bg-[#E5E0D8]">
@@ -280,7 +280,7 @@ export default function ArtWardrobePage() {
               </div>
 
               {/* Text Side */}
-              <div className="w-full lg:w-1/2 lg:h-full flex flex-col justify-center items-start px-12 lg:px-24 py-20 lg:py-0 overflow-hidden">
+              <div className="w-full lg:w-1/2 lg:h-full flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 py-16 lg:py-0 overflow-hidden">
                 <motion.div
                   initial={{ opacity: 0, x: isEven ? 50 : -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -288,16 +288,16 @@ export default function ArtWardrobePage() {
                   transition={{ duration: 1, delay: 0.2 }}
                   className="max-w-xl w-full"
                 >
-                  <h2 className={`font-serif font-bold text-black leading-tight uppercase ${category.id === 'military' ? 'text-5xl lg:text-6xl' : 'text-6xl lg:text-7xl'}`}>
+                  <h2 className={`font-serif font-bold text-black leading-tight uppercase ${category.id === 'military' ? 'text-4xl md:text-5xl lg:text-6xl' : 'text-5xl md:text-6xl lg:text-7xl'}`}>
                     {category.title}
                   </h2>
-                  <p className="text-lg text-gray-800 font-sans max-w-lg mt-8 leading-relaxed mb-4">
+                  <p className="text-base md:text-lg text-gray-800 font-sans max-w-lg mt-6 leading-relaxed mb-4">
                     {category.description}
                   </p>
                   
                   <MarqueeSlider 
                     images={category.images!} 
-                    className={category.id === 'armor' ? "mt-20" : "mt-6"} 
+                    className={category.id === 'armor' ? "mt-10 md:mt-20" : "mt-6"} 
                   />
                 </motion.div>
               </div>

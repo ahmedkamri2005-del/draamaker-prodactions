@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePathname } from 'next/navigation'
@@ -71,17 +72,19 @@ const Navbar = () => {
             {/* Left side: Logo */}
             <div className="flex-none">
                 <Link href="/" className="relative block h-14 md:h-20 w-48 md:w-64">
-                    <img 
+                    <Image 
                         src="/logos/dmp.white.png" 
                         alt="Dreamaker Productions" 
-                        className={`absolute inset-0 h-full w-auto object-contain transition-opacity duration-500 ${
+                        fill
+                        className={`object-contain object-left transition-opacity duration-500 ${
                             isWhiteNav ? 'opacity-0' : 'opacity-100'
                         }`} 
                     />
-                    <img 
+                    <Image 
                         src="/logos/dmp.black .png" 
                         alt="Dreamaker Productions" 
-                        className={`absolute inset-0 h-full w-auto object-contain transition-opacity duration-500 ${
+                        fill
+                        className={`object-contain object-left transition-opacity duration-500 ${
                             isWhiteNav ? 'opacity-100' : 'opacity-0'
                         }`} 
                     />
@@ -168,7 +171,7 @@ const Navbar = () => {
                     >
                         {/* Header Area */}
                         <div className="flex justify-between items-center mb-12">
-                             <img src="/logos/dmp.white.png" alt="Logo" className="h-10 w-auto object-contain" />
+                             <Image src="/logos/dmp.white.png" alt="Dreamaker Productions logo" width={160} height={40} className="h-10 w-auto object-contain" />
                              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-white/50 hover:text-white transition-colors">
                                  <X size={32} strokeWidth={1.5} />
                              </button>

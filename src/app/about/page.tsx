@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import QuoteModal from '../../components/QuoteModal';
 import Footer from '../../components/layout/Footer';
 
@@ -37,7 +38,7 @@ export default function AboutPage() {
       </Link>
 
       {/* 01. THE HERO (Typographic Impact) */}
-      <section className="bg-black h-screen min-h-[100dvh] flex items-center justify-center text-center px-6 md:px-10 relative overflow-hidden pt-20">
+      <section className="bg-black min-h-[50vh] flex items-center justify-center text-center px-6 md:px-10 relative overflow-hidden pt-44 md:pt-40 pb-12">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -61,7 +62,7 @@ export default function AboutPage() {
             viewport={{ once: true, amount: 0.3 }}
             className="w-full aspect-[4/5] md:max-h-[60vh] rounded-sm overflow-hidden relative group mx-auto"
           >
-            <img src="/pics.of.dmp/about.us/FRED.webp" alt="Fred Challa" className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
+            <Image src="/pics.of.dmp/about.us/FRED.webp" alt="Fred Challa — Founder of Dreamaker Productions" fill className="object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
           </motion.div>
 
@@ -103,7 +104,7 @@ export default function AboutPage() {
             className="w-full max-w-[500px] mx-auto aspect-[4/3] bg-zinc-900 border border-white/5 p-2 md:p-3 transform -rotate-1 shadow-2xl relative"
           >
             <div className="w-full h-full relative overflow-hidden border border-white/10 shadow-[inset_0_0_50px_rgba(0,0,0,0.5)] bg-zinc-950">
-               <img src="/pics.of.dmp/about.us/JOURNAL.webp" alt="Newspaper clipping" className="w-full h-full object-contain" />
+               <Image src="/pics.of.dmp/about.us/JOURNAL.webp" alt="Dreamaker Productions newspaper clipping" fill className="object-contain" />
             </div>
           </motion.div>
 
@@ -146,7 +147,7 @@ export default function AboutPage() {
             transition={{ duration: 1.5 }}
             className="w-full aspect-video md:aspect-[21/9] relative overflow-hidden bg-zinc-900 border-y border-white/5 group"
         >
-            <img src="/pics.of.dmp/about.us/TheConnection.webp" alt="High-end technical equipment" className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
+            <Image src="/pics.of.dmp/about.us/TheConnection.webp" alt="Dreamaker Productions high-end technical equipment" fill className="object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
         </motion.div>
 

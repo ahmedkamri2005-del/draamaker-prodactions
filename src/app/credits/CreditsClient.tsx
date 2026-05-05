@@ -145,13 +145,13 @@ export default function CreditsClient() {
       {/* ═══════════════════════════════════════════════════════════════════════
           01. HERO — VIDEO BACKGROUND
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative h-screen min-h-[100dvh] flex flex-col justify-center items-center text-center px-6 pt-20 overflow-hidden">
+      <section className="relative h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden">
         {/* Background Video — Vimeo */}
-        <div className="absolute inset-0 z-0 bg-black">
+        <div className="absolute inset-0 z-0 bg-black overflow-hidden">
           <iframe
             src="https://player.vimeo.com/video/1189137794?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-            className="absolute top-1/2 left-1/2 w-[300vw] h-[110vh] md:w-[120vw] md:h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
             title="credits-hero"
           />
 

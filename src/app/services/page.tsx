@@ -247,37 +247,43 @@ export default function ServicesPage() {
       </div>
 
       <div className="relative z-10">
+
+        {/* Back to Home — fixed, matching Locations page position */}
         <Link
           href="/"
-          className="absolute top-24 md:top-32 left-6 md:left-12 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-white/50 hover:text-white hover:-translate-x-2 transition-all duration-300 z-50"
+          className="fixed top-24 md:top-32 left-6 md:left-12 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-white/50 hover:text-white hover:-translate-x-2 transition-all duration-300 z-50"
         >
           <span>&larr;</span> Back to Home
         </Link>
         
         {/* --- HERO SECTION (FULLSCREEN & IMMERSIVE) --- */}
-        <section className="relative min-h-screen w-full flex flex-col justify-start items-center overflow-hidden pt-44 md:pt-52 pb-20">
+        <section className="relative min-h-screen w-full flex flex-col justify-end items-center overflow-hidden pb-16 md:pb-24">
           
           {/* Fullscreen Video Background */}
-          <div className="absolute inset-0 z-0 bg-black">
-            <iframe
-              src="https://player.vimeo.com/video/1188941343?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1"
-              className="absolute top-1/2 left-1/2 w-[300vw] h-[110vh] md:w-[150vw] md:h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-100"
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-              title="vedio services"
-            ></iframe>
+          <div className="absolute inset-0 z-0 bg-black overflow-hidden">
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover opacity-100"
+            >
+              <source src="/videos/vedio services.webm" type="video/webm" />
+            </video>
             
             {/* Enhanced Dark Overlay (Darker at top/bottom for readability) */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/70 z-10" />
           </div>
 
-          {/* Content Wrapper - Moved towards bottom */}
+          {/* Content Wrapper */}
           <div className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-start text-left">
+            
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
+              transition={{ duration: 1, delay: 0.15, ease: "easeOut" }}
             >
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-serif leading-tight tracking-tight uppercase mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight tracking-tight uppercase mb-6">
                 All-in-One, <br />
                 <span className="italic">Tailor-Made</span> <br />
                 Production Services

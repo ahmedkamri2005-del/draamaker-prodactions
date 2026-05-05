@@ -86,14 +86,17 @@ export default function LocationsPage() {
       </Link>
 
       {/* ── HERO SECTION ───────────────────────────────────────────────── */}
-      <section className="relative h-screen min-h-[100dvh] w-full flex flex-col justify-center items-center text-center px-6 pt-20 overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-black">
-          <iframe
-            src="https://player.vimeo.com/video/1188941106?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1"
-            className="absolute top-1/2 left-1/2 w-[300vw] h-[110vh] md:w-[120vw] md:h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-100"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-            title="locations.back"
-          ></iframe>
+      <section className="relative h-screen w-full flex flex-col justify-center items-center text-center px-6 overflow-hidden">
+        <div className="absolute inset-0 z-0 bg-black overflow-hidden">
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-100"
+          >
+            <source src="/videos/locations.back.webm" type="video/webm" />
+          </video>
           <div className="absolute inset-0 bg-black/20 z-10" />
         </div>
 

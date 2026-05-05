@@ -2,6 +2,7 @@
 
 import { Instagram, Linkedin } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 /* ─── Custom Vimeo icon (lucide doesn't include one) ─── */
 const VimeoIcon = ({ size = 20, className = "" }) => (
@@ -40,9 +41,11 @@ const Footer = () => {
                     {/* Block 1 — Brand (Always left aligned) */}
                     <div className="space-y-6">
                         <Link href="/" className="inline-block group">
-                            <img
+                            <Image
                                 src="/logos/dmp.white.png"
                                 alt="Dreamaker Productions - Morocco Film Services"
+                                width={200}
+                                height={64}
                                 className="h-14 lg:h-16 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
                             />
                         </Link>
