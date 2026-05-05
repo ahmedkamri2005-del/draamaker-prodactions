@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Footer from '../components/layout/Footer'
@@ -16,18 +17,24 @@ const clientLogos = [
 ]
 
 export default function Home() {
+    const [isBgVideoLoaded, setIsBgVideoLoaded] = useState(false);
+    const [isCaderVideoLoaded, setIsCaderVideoLoaded] = useState(false);
+
     return (
         <main className="bg-white min-h-screen font-sans selection:bg-[#009ED8] selection:text-white">
             {/* 1. HERO SECTION */}
             <section className="relative w-full min-h-screen px-6 lg:px-12 flex flex-col items-center justify-center pt-32 pb-12 overflow-hidden">
-                {/* HERO BACKGROUND VIDEO */}
-                <div className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
+                {/* HERO BACKGROUND VIDEO — with instant black fallback crossfade */}
+                <div className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden bg-black">
                     <video 
                         autoPlay 
                         muted 
                         loop 
                         playsInline
-                        className="absolute inset-0 w-full h-full object-cover"
+                        onLoadedData={() => setIsBgVideoLoaded(true)}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                            isBgVideoLoaded ? 'opacity-100' : 'opacity-0'
+                        }`}
                     >
                         <source src="/videos/backgroun global.webm" type="video/webm" />
                     </video>
@@ -43,12 +50,26 @@ export default function Home() {
                         transition={{ duration: 1.2, ease: "easeOut" as const }}
                         className="w-full aspect-[16/7] md:aspect-[21/9] rounded-xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] overflow-hidden relative z-0 bg-zinc-900"
                     >
+                        {/* Layer 1 — Instant fallback image (loads immediately) */}
+                        <Image
+                            src="/images/cader1.webp"
+                            alt="Dreamaker Productions Cover"
+                            fill
+                            priority
+                            className={`object-cover transition-opacity duration-1000 ease-in-out ${
+                                isCaderVideoLoaded ? 'opacity-0' : 'opacity-100'
+                            }`}
+                        />
+                        {/* Layer 2 — Video fades in on top once loaded */}
                         <video
                             autoPlay
                             muted
                             loop
                             playsInline
-                            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                            onLoadedData={() => setIsCaderVideoLoaded(true)}
+                            className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-1000 ease-in-out ${
+                                isCaderVideoLoaded ? 'opacity-100' : 'opacity-0'
+                            }`}
                         >
                             <source src="/videos/video.cader(1).webm" type="video/webm" />
                         </video>
