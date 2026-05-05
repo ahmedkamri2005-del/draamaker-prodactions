@@ -1,9 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useState, useEffect, useRef } from 'react'
 import Footer from '../components/layout/Footer'
 import VisionSection from '../components/sections/VisionSection'
 
@@ -17,24 +17,37 @@ const clientLogos = [
 ]
 
 export default function Home() {
-    const [isBgVideoLoaded, setIsBgVideoLoaded] = useState(false);
-    const [isCaderVideoLoaded, setIsCaderVideoLoaded] = useState(false);
+    const [videoReady, setVideoReady] = useState(false)
+    const videoRef = useRef<HTMLVideoElement>(null)
+
+    useEffect(() => {
+        const video = videoRef.current
+        if (!video) return
+
+        // Force play (handles Firefox autoplay restrictions)
+        video.play().catch(() => {
+            // If autoplay blocked, hide poster after 1.5s anyway
+            const t = setTimeout(() => setVideoReady(true), 1500)
+            return () => clearTimeout(t)
+        })
+
+        // Fallback: hide poster after 1.5s max regardless
+        const fallback = setTimeout(() => setVideoReady(true), 1500)
+        return () => clearTimeout(fallback)
+    }, [])
 
     return (
         <main className="bg-white min-h-screen font-sans selection:bg-[#009ED8] selection:text-white">
             {/* 1. HERO SECTION */}
             <section className="relative w-full min-h-screen px-6 lg:px-12 flex flex-col items-center justify-center pt-32 pb-12 overflow-hidden">
-                {/* HERO BACKGROUND VIDEO — with instant black fallback crossfade */}
-                <div className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden bg-black">
+                {/* HERO BACKGROUND VIDEO */}
+                <div className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
                     <video 
                         autoPlay 
                         muted 
                         loop 
                         playsInline
-                        onLoadedData={() => setIsBgVideoLoaded(true)}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                            isBgVideoLoaded ? 'opacity-100' : 'opacity-0'
-                        }`}
+                        className="absolute inset-0 w-full h-full object-cover"
                     >
                         <source src="/videos/backgroun global.webm" type="video/webm" />
                     </video>
@@ -50,29 +63,32 @@ export default function Home() {
                         transition={{ duration: 1.2, ease: "easeOut" as const }}
                         className="w-full aspect-[16/7] md:aspect-[21/9] rounded-xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] overflow-hidden relative z-0 bg-zinc-900"
                     >
-                        {/* Layer 1 — Instant fallback image (loads immediately) */}
-                        <Image
-                            src="/images/cader1.webp"
-                            alt="Dreamaker Productions Cover"
-                            fill
-                            priority
-                            className={`object-cover transition-opacity duration-1000 ease-in-out ${
-                                isCaderVideoLoaded ? 'opacity-0' : 'opacity-100'
-                            }`}
-                        />
-                        {/* Layer 2 — Video fades in on top once loaded */}
+                        {/* The video — always present, always playing */}
                         <video
+                            ref={videoRef}
                             autoPlay
                             muted
                             loop
                             playsInline
-                            onLoadedData={() => setIsCaderVideoLoaded(true)}
-                            className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-1000 ease-in-out ${
-                                isCaderVideoLoaded ? 'opacity-100' : 'opacity-0'
-                            }`}
+                            onCanPlay={() => setVideoReady(true)}
+                            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                         >
                             <source src="/videos/video.cader(1).webm" type="video/webm" />
                         </video>
+
+                        {/* Poster image — shown first, fades out when video is ready */}
+                        <div
+                            className="absolute inset-0 z-10 transition-opacity duration-700 ease-in-out"
+                            style={{ opacity: videoReady ? 0 : 1, pointerEvents: 'none' }}
+                        >
+                            <Image
+                                src="/images/cader1.webp"
+                                alt="Dreamaker Productions"
+                                fill
+                                priority
+                                className="object-cover"
+                            />
+                        </div>
                     </motion.div>
 
                     {/* 2. THE HEADING */}
