@@ -7,17 +7,17 @@ const projects = [
     {
         title: "The Silent Echo",
         category: "Commercial",
-        image: "/works/emir.webp"
+        image: "/works/posters/emir.jpg"
     },
     {
         title: "Midnight Fly",
         category: "Documentary",
-        image: "/works/midnight-fly.png"
+        image: "/works/posters/midnight-fly.png"
     },
     {
         title: "Garden of Aden",
         category: "Cinematic Narrative",
-        image: "/works/garden-of-aden.png"
+        image: "/works/posters/garden-of-aden.png"
     },
     {
         title: "Desert Chronicles",

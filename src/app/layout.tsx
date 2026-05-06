@@ -40,7 +40,7 @@ export const metadata = {
     siteName: 'Dreamaker Productions',
     images: [
       {
-        url: '/works/Aazaan.png', 
+        url: '/works/posters/aazaan.png', 
         width: 1200,
         height: 630,
         alt: 'Dreamaker Productions Morocco',
