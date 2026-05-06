@@ -60,7 +60,7 @@ const SelectedCredits = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-                        src="/works/dirty-angels.png"
+                        src="/works/posters/dirty-angels.png"
                         alt="Dirty Angels"
                         className="w-full aspect-[2/3] object-cover rounded shadow-[0_0_50px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:-translate-y-2 md:hover:-translate-y-4 hover:scale-105 border border-white/10"
                     />
@@ -69,7 +69,7 @@ const SelectedCredits = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                        src="/works/CIA CONFIDENTIAL.jpg"
+                        src="/works/posters/CIA CONFIDENTIAL.jpg"
                         alt="CIA Confidential"
                         className="w-full aspect-[2/3] object-cover rounded shadow-[0_0_50px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:-translate-y-2 md:hover:-translate-y-4 hover:scale-105 border border-white/10"
                     />
@@ -78,7 +78,7 @@ const SelectedCredits = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-                        src="/works/black.angel.jpg"
+                        src="/works/posters/black.angel.jpg"
                         alt="Black Angel"
                         className="w-full aspect-[2/3] object-cover rounded shadow-[0_0_50px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:-translate-y-2 md:hover:-translate-y-4 hover:scale-105 border border-white/10"
                     />
@@ -87,7 +87,7 @@ const SelectedCredits = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-                        src="/works/pegase.jpg"
+                        src="/works/posters/pegase.jpg"
                         alt="Pegase"
                         className="w-full aspect-[2/3] object-cover rounded shadow-[0_0_50px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:-translate-y-2 md:hover:-translate-y-4 hover:scale-105 border border-white/10"
                     />
@@ -96,7 +96,7 @@ const SelectedCredits = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-                        src="/works/clash.of.the.god.jpg"
+                        src="/works/posters/clash.of.the.god.jpg"
                         alt="Clash of the Gods"
                         className="w-full aspect-[2/3] object-cover rounded shadow-[0_0_50px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:-translate-y-2 md:hover:-translate-y-4 hover:scale-105 border border-white/10"
                     />

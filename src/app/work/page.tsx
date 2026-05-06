@@ -110,7 +110,7 @@ export default function WorkPage() {
                             {/* Poster */}
                             <div className="w-full md:w-1/2 flex justify-center items-center p-4">
                                 <Image
-                                    src={`/works/${movie.file}`}
+                                    src={`/works/posters/${movie.file}`}
                                     alt={`${movie.title} movie poster`}
                                     width={500}
                                     height={750}
