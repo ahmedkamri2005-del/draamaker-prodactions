@@ -47,7 +47,7 @@ const projects = [
   { id: 31, title: "The Pyramids", category: "Commercials", role: 'Locations & Scouting', image: "/works/the-pyramids---amf-hd.jpg", videoUrl: "/works/commercial/the-pyramids---amf-hd.webm" },
   { id: 32, title: "Tine Piano", category: "Commercials", role: 'Production Support', image: "/works/tine-piano.jpg", videoUrl: "/works/commercial/tine-piano.webm" },
   { id: 33, title: "Toro", category: "Commercials", role: 'Full Service Production', image: "/works/toro.jpg", videoUrl: "/works/commercial/toro.webm" },
-  { id: 34, title: "TUI", category: "Commercials", role: 'Production Services', image: "/works/tui.jpg", videoUrl: "/works/commercial/tui.webm" },
+  { id: 34, title: "TUI", category: "Commercials", role: 'Production Services', image: "/works/tui.jpg", videoUrl: "/works/commercial/tui.mp4" },
   { id: 35, title: "Ulala Mango", category: "Commercials", role: 'Locations & Logistics', image: "/works/ulala-mango.jpg", videoUrl: "/works/commercial/ulala-mango.webm" },
 
   // --- MUSIC VIDEO ---
