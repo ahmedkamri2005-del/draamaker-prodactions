@@ -10,20 +10,20 @@ import Footer from '../../components/layout/Footer';
 const categories = ["All", "Feature Films", "TV", "Commercials", "Music Video"];
 
 const projects = [
-  { id: 1, title: "Aazaan", category: "Feature Films", role: 'Moroccan Production Partner', image: "/works/posters/Aazaan.png", videoUrl: "/videos/Feature/aazaan.webm" },
+  { id: 1, title: "Aazaan", category: "Feature Films", role: 'Moroccan Production Partner', image: "/works/posters/aazaan.png", videoUrl: "/videos/Feature/aazaan.webm" },
   { id: 2, title: "Pegasus", category: "Feature Films", role: 'Moroccan Production Partner', image: "/works/posters/pegase.jpg", videoUrl: "/videos/Feature/pegasus.webm" },
   { id: 3, title: "Midnight Fly", category: "Feature Films", role: 'Production & Locations', image: "/works/posters/midnight-fly.png", videoUrl: "/videos/Feature/midnight-fly.webm" },
-  { id: 4, title: "Emir", category: "Feature Films", role: 'Full Service Production', image: "/works/posters/Emir.jpg", videoUrl: "/videos/Feature/emir.webm" },
+  { id: 4, title: "Emir", category: "Feature Films", role: 'Full Service Production', image: "/works/posters/emir.jpg", videoUrl: "/videos/Feature/emir.webm" },
   { id: 5, title: "Agent Vinod", category: "Feature Films", role: 'Moroccan Production Partner', image: "/works/posters/agent-vinod.jpg", videoUrl: "/videos/Feature/agent-vinod.webm" },
-  { id: 6, title: "Daag", category: "TV", role: 'Moroccan Production Partner', image: "/works/posters/DAAG.jpg", videoUrl: "/works/tv/dag.webm" },
+  { id: 6, title: "Daag", category: "TV", role: 'Moroccan Production Partner', image: "/works/posters/daag.jpg", videoUrl: "/works/tv/dag.webm" },
   { id: 7, title: "Dirty Angels", category: "Feature Films", role: 'Full Service Production', image: "/works/posters/dirty-angels.png", videoUrl: "/videos/Feature/dirty-angels.webm" },
   { id: 8, title: "The Walk", category: "Feature Films", role: 'Moroccan Production Partner', image: "/works/posters/the-walk.png", videoUrl: "/videos/Feature/the-walk.webm" },
-  { id: 9, title: "Black Angel", category: "Feature Films", role: 'Location & Logistics', image: "/works/posters/black.angel.jpg", videoUrl: "/videos/Feature/black-angel.webm" },
-  { id: 10, title: "Clash of the Gods", category: "TV", role: 'Location Scouting & Crew', image: "/works/posters/clash.of.the.god.jpg", videoUrl: "/works/tv/dag.webm" },
-  { id: 11, title: "Flirt", category: "Feature Films", role: 'Production Services', image: "/works/posters/Flirt.png", videoUrl: "/videos/Feature/flirt.webm" },
+  { id: 9, title: "Black Angel", category: "Feature Films", role: 'Location & Logistics', image: "/works/posters/black-angel.jpg", videoUrl: "/videos/Feature/black-angel.webm" },
+  { id: 10, title: "Clash of the Gods", category: "TV", role: 'Location Scouting & Crew', image: "/works/posters/clash-of-the-gods.jpg", videoUrl: "/works/tv/dag.webm" },
+  { id: 11, title: "Flirt", category: "Feature Films", role: 'Production Services', image: "/works/posters/flirt.png", videoUrl: "/videos/Feature/flirt.webm" },
   { id: 12, title: "Okuotoko", category: "Feature Films", role: 'Full Service Production', image: "/works/posters/okuotoko.jpg", videoUrl: "/videos/Feature/okuotoko.webm" },
   { id: 13, title: "Garden of Aden", category: "Feature Films", role: 'Full Service Production', image: "/works/posters/garden-of-aden.png", videoUrl: "/videos/Feature/garden-of-aden.webm" },
-  { id: 14, title: "CIA Confidential", category: "TV", role: 'Location & Logistics', image: "/works/posters/CIA CONFIDENTIAL.jpg", videoUrl: "/works/tv/cia-confidential.webm" },
+  { id: 14, title: "CIA Confidential", category: "TV", role: 'Location & Logistics', image: "/works/posters/cia-confidential.jpg", videoUrl: "/works/tv/cia-confidential.webm" },
 
   // --- TV ---
   { id: 15, title: "Egypt Underworld", category: "TV", role: 'Production Support', image: "/works/egypt-underworld.png", videoUrl: "/works/tv/egypt-underworld.webm" },

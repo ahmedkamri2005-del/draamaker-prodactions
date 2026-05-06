@@ -9,17 +9,17 @@ const movies = [
     { title: "THE WALK", description: "In 1974, high-wire artist Philippe Petit recruits a team of people to help him realize his dream: to walk the immense void between the World Trade Center towers.", file: "the-walk.png", trailerUrl: "https://www.youtube.com/embed/eKSeSX-dzso?autoplay=1" },
     { title: "AGENT VINOD", description: "A series of seemingly unconnected events across the globe leads to Agent Vinod undertaking a globe-trotting mission to discover the truth.", file: "agent-vinod.jpg", trailerUrl: "https://www.youtube.com/embed/tF2B2DkH8k0?autoplay=1" },
     { title: "DIRTY ANGELS", description: "During the 2021 U.S. withdrawal from Afghanistan, a group of female soldiers is sent back in to rescue a group of kidnapped teenagers.", file: "dirty-angels.png", trailerUrl: "https://www.youtube.com/embed/Sml-wsN65mI?autoplay=1" },
-    { title: "CLASH OF THE GODS", description: "An epic documentary series exploring the ancient myths and the real-life historical events that may have inspired them.", file: "clash.of.the.god.jpg", trailerUrl: "https://www.youtube.com/embed/gL2-1dC1Fvc?autoplay=1" },
-    { title: "AAZAAN", description: "An army officer working for RAW gets drawn into the murky world of espionage, only to find his younger brother is a suspected terrorist.", file: "Aazaan.png", trailerUrl: "https://www.youtube.com/embed/tOGvOPGa3PQ?autoplay=1" },
+    { title: "CLASH OF THE GODS", description: "An epic documentary series exploring the ancient myths and the real-life historical events that may have inspired them.", file: "clash-of-the-gods.jpg", trailerUrl: "https://www.youtube.com/embed/gL2-1dC1Fvc?autoplay=1" },
+    { title: "AAZAAN", description: "An army officer working for RAW gets drawn into the murky world of espionage, only to find his younger brother is a suspected terrorist.", file: "aazaan.png", trailerUrl: "https://www.youtube.com/embed/tOGvOPGa3PQ?autoplay=1" },
     { title: "OKUOTOKO", description: "A man who is deeply in debt suddenly wins the lottery, but his best friend disappears with the money, leading him on a quest to discover the true value of wealth.", file: "okuotoko.jpg", trailerUrl: "https://www.youtube.com/embed/mJXZhsVbK7s?autoplay=1&list=RDmJXZhsVbK7s&start_radio=1" },
     { title: "PEGASE", description: "A haunting and visually stunning psychological drama by Moroccan director Mohamed Mouftakir.", file: "pegase.jpg", trailerUrl: "https://www.youtube.com/embed/9KceWSXryDQ?autoplay=1" },
-    { title: "BLACK ANGEL", description: "A gripping tale of mystery and survival.", file: "black.angel.jpg", trailerUrl: "https://www.youtube.com/embed/dIE_56C9z4k?autoplay=1" },
-    { title: "CIA CONFIDENTIAL", description: "An inside look at the most secretive intelligence operations.", file: "CIA CONFIDENTIAL.jpg", trailerUrl: "https://www.youtube.com/embed/rJQt4YIiZMg?autoplay=1" },
-    { title: "EMIR", description: "A spectacular musical drama about a nanny working in a royal household.", file: "Emir.jpg", trailerUrl: "https://www.youtube.com/embed/_iUI6Vwf4sw?autoplay=1" },
-    { title: "FLIRT", description: "A romantic drama exploring the complexities of relationships across different cities.", file: "Flirt.png", trailerUrl: "https://www.youtube.com/embed/msOnGTQtA9E?autoplay=1" },
+    { title: "BLACK ANGEL", description: "A gripping tale of mystery and survival.", file: "black-angel.jpg", trailerUrl: "https://www.youtube.com/embed/dIE_56C9z4k?autoplay=1" },
+    { title: "CIA CONFIDENTIAL", description: "An inside look at the most secretive intelligence operations.", file: "cia-confidential.jpg", trailerUrl: "https://www.youtube.com/embed/rJQt4YIiZMg?autoplay=1" },
+    { title: "EMIR", description: "A spectacular musical drama about a nanny working in a royal household.", file: "emir.jpg", trailerUrl: "https://www.youtube.com/embed/_iUI6Vwf4sw?autoplay=1" },
+    { title: "FLIRT", description: "A romantic drama exploring the complexities of relationships across different cities.", file: "flirt.png", trailerUrl: "https://www.youtube.com/embed/msOnGTQtA9E?autoplay=1" },
     { title: "GARDEN OF ADEN", description: "A beautifully shot cinematic journey into human resilience.", file: "garden-of-aden.png", trailerUrl: "https://www.youtube.com/embed/yz-O4ZEqCPA?autoplay=1" },
     { title: "MIDNIGHT FLY", description: "A suspenseful thriller set against the neon lights of a restless city.", file: "midnight-fly.png", trailerUrl: "https://www.youtube.com/embed/iH5D3aDEips?autoplay=1" },
-    { title: "DAAG", description: "An intense story of revenge, justice, and unyielding determination.", file: "DAAG.jpg", trailerUrl: "https://www.youtube.com/embed/2pjy6031Dvk?autoplay=1" }
+    { title: "DAAG", description: "An intense story of revenge, justice, and unyielding determination.", file: "daag.jpg", trailerUrl: "https://www.youtube.com/embed/2pjy6031Dvk?autoplay=1" }
 ];
 
 /* Infinite horizontal marquee logos background */

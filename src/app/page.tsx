@@ -308,10 +308,10 @@ export default function Home() {
                                 <div key={i} className="flex items-center flex-nowrap shrink-0">
                                     {[
                                         { title: 'Dirty Angels', image: '/works/posters/dirty-angels.png' },
-                                        { title: 'CIA Confidential', image: '/works/posters/CIA%20CONFIDENTIAL.jpg' },
-                                        { title: 'Black Angel', image: '/works/posters/black.angel.jpg' },
+                                        { title: 'CIA Confidential', image: '/works/posters/cia-confidential.jpg' },
+                                        { title: 'Black Angel', image: '/works/posters/black-angel.jpg' },
                                         { title: 'Pegase', image: '/works/posters/pegase.jpg' },
-                                        { title: 'Clash of the Gods', image: '/works/posters/clash.of.the.god.jpg' }
+                                        { title: 'Clash of the Gods', image: '/works/posters/clash-of-the-gods.jpg' }
                                     ].map((item, idx) => (
                                         <div 
                                             key={`${i}-${idx}`}
