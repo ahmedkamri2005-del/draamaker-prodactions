@@ -19,6 +19,22 @@ const clientLogos = [
 export default function Home() {
     const [videoReady, setVideoReady] = useState(false)
     const videoRef = useRef<HTMLVideoElement>(null)
+    const [currentPosterIndex, setCurrentPosterIndex] = useState(0)
+
+    const notablePosters = [
+        { title: 'Dirty Angels', image: '/works/posters/dirty-angels.png' },
+        { title: 'CIA Confidential', image: '/works/posters/cia-confidential.jpg' },
+        { title: 'Black Angel', image: '/works/posters/black-angel.jpg' },
+        { title: 'Pegase', image: '/works/posters/pegase.jpg' },
+        { title: 'Clash of the Gods', image: '/works/posters/clash-of-the-gods.jpg' }
+    ]
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentPosterIndex((prev) => (prev + 1) % notablePosters.length)
+        }, 3000)
+        return () => clearInterval(timer)
+    }, [notablePosters.length])
 
     useEffect(() => {
         const video = videoRef.current
@@ -298,38 +314,64 @@ export default function Home() {
                     </div>
                 </div>
                     
-                <div className="w-full overflow-hidden mb-20 flex group/marquee relative z-10">
-                        <motion.div 
-                            animate={{ x: ["0%", "-50%"] }}
-                            transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
-                            className="flex items-center flex-nowrap"
-                        >
-                            {[...Array(2)].map((_, i) => (
-                                <div key={i} className="flex items-center flex-nowrap shrink-0">
-                                    {[
-                                        { title: 'Dirty Angels', image: '/works/posters/dirty-angels.png' },
-                                        { title: 'CIA Confidential', image: '/works/posters/cia-confidential.jpg' },
-                                        { title: 'Black Angel', image: '/works/posters/black-angel.jpg' },
-                                        { title: 'Pegase', image: '/works/posters/pegase.jpg' },
-                                        { title: 'Clash of the Gods', image: '/works/posters/clash-of-the-gods.jpg' }
-                                    ].map((item, idx) => (
-                                        <div 
-                                            key={`${i}-${idx}`}
-                                            className="w-[45vw] md:w-[25vw] lg:w-[20vw] aspect-[2/3] bg-zinc-900 overflow-hidden relative group shrink-0"
-                                        >
-                                            <Image src={item.image} alt={`${item.title} movie poster`} fill className="object-cover z-10 group-hover:scale-110 transition-transform duration-700" />
-                                            {/* Hover overlay with title */}
-                                            <div className="absolute inset-0 bg-zinc-950/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center pointer-events-none">
-                                                <span className="text-white font-serif text-lg tracking-wider transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">
-                                                    {item.title}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    ))}
+                <div className="w-full max-w-sm mx-auto relative z-10 px-6 overflow-visible group">
+                    <div className="relative aspect-[2/3] w-full bg-zinc-900 shadow-2xl rounded-sm overflow-hidden border border-black/5">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={currentPosterIndex}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 1.05 }}
+                                transition={{ duration: 0.6, ease: "easeInOut" }}
+                                className="absolute inset-0"
+                            >
+                                <Image 
+                                    src={notablePosters[currentPosterIndex].image} 
+                                    alt={notablePosters[currentPosterIndex].title} 
+                                    fill 
+                                    className="object-cover"
+                                />
+                                <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                                    <h3 className="text-white font-serif text-xl tracking-wide uppercase text-center">
+                                        {notablePosters[currentPosterIndex].title}
+                                    </h3>
                                 </div>
-                            ))}
-                        </motion.div>
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
+
+                    {/* Navigation Arrows */}
+                    <button 
+                        onClick={() => setCurrentPosterIndex((prev) => (prev - 1 + notablePosters.length) % notablePosters.length)}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 md:-translate-x-20 text-black hover:text-[#00AEEF] transition-all duration-300 p-2 z-30 hover:scale-110 active:scale-95"
+                        aria-label="Previous poster"
+                    >
+                        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button 
+                        onClick={() => setCurrentPosterIndex((prev) => (prev + 1) % notablePosters.length)}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 md:translate-x-20 text-black hover:text-[#00AEEF] transition-all duration-300 p-2 z-30 hover:scale-110 active:scale-95"
+                        aria-label="Next poster"
+                    >
+                        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+
+                    {/* Dots */}
+                    <div className="flex justify-center gap-3 mt-10">
+                        {notablePosters.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setCurrentPosterIndex(idx)}
+                                className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${idx === currentPosterIndex ? 'bg-[#00AEEF] w-8' : 'bg-black/10 hover:bg-black/30'}`}
+                                aria-label={`Go to slide ${idx + 1}`}
+                            />
+                        ))}
+                    </div>
+                </div>
 
 
                 <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 flex flex-col items-center">
