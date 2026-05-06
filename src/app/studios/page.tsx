@@ -191,6 +191,11 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   const next = () => setCurrent((prev) => (prev + 1) % images.length);
   const prev = () => setCurrent((prev) => (prev - 1 + images.length) % images.length);
 
+  useEffect(() => {
+    const timer = setInterval(next, 3000);
+    return () => clearInterval(timer);
+  }, [current]);
+
   return (
     <div className="relative w-full aspect-[16/10] overflow-hidden rounded-sm group bg-zinc-900">
       <AnimatePresence mode="wait">
