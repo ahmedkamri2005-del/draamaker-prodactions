@@ -109,13 +109,15 @@ export default function WorkPage() {
                         >
                             {/* Poster */}
                             <div className="w-full md:w-1/2 flex justify-center items-center p-4">
-                                <Image
-                                    src={`/works/posters/${movie.file}`}
-                                    alt={`${movie.title} movie poster`}
-                                    width={500}
-                                    height={750}
-                                    className="w-full h-auto max-h-[75vh] object-contain drop-shadow-2xl rounded-md"
-                                />
+                                <div className="w-full max-w-sm">
+                                    <Image
+                                        src={`/works/posters/${movie.file}`}
+                                        alt={`${movie.title} movie poster`}
+                                        width={400}
+                                        height={600}
+                                        className="w-full h-auto object-contain drop-shadow-2xl rounded-md"
+                                    />
+                                </div>
                             </div>
 
                             {/* Text */}

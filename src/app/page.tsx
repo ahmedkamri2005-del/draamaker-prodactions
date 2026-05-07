@@ -343,20 +343,20 @@ export default function Home() {
                     {/* Navigation Arrows */}
                     <button 
                         onClick={() => setCurrentPosterIndex((prev) => (prev - 1 + notablePosters.length) % notablePosters.length)}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 md:-translate-x-20 text-black hover:text-[#00AEEF] transition-all duration-300 p-2 z-30 hover:scale-110 active:scale-95"
+                        className="absolute left-4 md:-left-20 top-1/2 -translate-y-1/2 text-black/50 hover:text-[#00AEEF] transition-all duration-300 p-2 z-30 hover:scale-110 active:scale-95 bg-white/50 md:bg-transparent rounded-full backdrop-blur-sm md:backdrop-blur-none"
                         aria-label="Previous poster"
                     >
                         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 19l-7-7 7-7" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
                     <button 
                         onClick={() => setCurrentPosterIndex((prev) => (prev + 1) % notablePosters.length)}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 md:translate-x-20 text-black hover:text-[#00AEEF] transition-all duration-300 p-2 z-30 hover:scale-110 active:scale-95"
+                        className="absolute right-4 md:-right-20 top-1/2 -translate-y-1/2 text-black/50 hover:text-[#00AEEF] transition-all duration-300 p-2 z-30 hover:scale-110 active:scale-95 bg-white/50 md:bg-transparent rounded-full backdrop-blur-sm md:backdrop-blur-none"
                         aria-label="Next poster"
                     >
                         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 5l7 7-7 7" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
 
