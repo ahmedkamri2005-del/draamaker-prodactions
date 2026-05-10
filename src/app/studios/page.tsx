@@ -191,18 +191,25 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   const next = () => setCurrent((prev) => (prev + 1) % images.length);
   const prev = () => setCurrent((prev) => (prev - 1 + images.length) % images.length);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
   return (
     <div className="relative w-full aspect-[16/10] overflow-hidden rounded-sm group bg-zinc-900">
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         <motion.div
           key={current}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
           className="absolute inset-0"
         >
-          <Image src={images[current]} alt="Facility" fill className="object-cover" />
+          <Image src={images[current]} alt="Facility" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
         </motion.div>
       </AnimatePresence>
       

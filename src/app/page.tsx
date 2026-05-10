@@ -11,30 +11,26 @@ const clientLogos = [
     "/clients/0.png", "/clients/1.png", "/clients/2.png", "/clients/3.png",
     "/clients/4.png", "/clients/7.png", "/clients/8.png", "/clients/9.png",
     "/clients/NATIONALGEOGRAPHIC.png", "/clients/history_logo.png", "/clients/netflix.png", "/clients/so-it-goes-productions-1.png",
-    "/clients2/Untitled.png", "/clients2/Untitled (1).png", "/clients2/Untitled (2).png", "/clients2/Untitled (3).png",
-    "/clients2/Untitled (4).png", "/clients2/Untitled (5).png", "/clients2/Untitled (6).png", "/clients2/Untitled (7).png",
-    "/clients2/Untitled (8).png", "/clients2/Untitled (9).png", "/clients2/Untitled (10).png", "/clients2/Untitled (11).png"
+    "/clients2/Untitled.png", "/clients2/Untitled (1).png", "/works/logo/logo.music.jpg",
+    "/clients2/Untitled (4).png", "/works/logo/brand.gif", "/works/logo/amf-logo.svg", "/clients2/Untitled (7).png",
+    "/works/logo/Untitled (9).png", "/clients2/Untitled (9).png", "/clients2/Untitled (10).png", "/clients2/Untitled (11).png"
 ]
 
 export default function Home() {
     const [videoReady, setVideoReady] = useState(false)
     const videoRef = useRef<HTMLVideoElement>(null)
-    const [currentPosterIndex, setCurrentPosterIndex] = useState(0)
 
     const notablePosters = [
-        { title: 'Dirty Angels', image: '/works/posters/dirty-angels.png' },
-        { title: 'CIA Confidential', image: '/works/posters/cia-confidential.jpg' },
+        { title: 'Aazaan', image: '/works/posters/aazaan.png' },
+        { title: 'Agent Vinod', image: '/works/posters/agent-vinod.jpg' },
         { title: 'Black Angel', image: '/works/posters/black-angel.jpg' },
-        { title: 'Pegase', image: '/works/posters/pegase.jpg' },
-        { title: 'Clash of the Gods', image: '/works/posters/clash-of-the-gods.jpg' }
+        { title: 'CIA Confidential', image: '/works/posters/cia-confidential.jpg' },
+        { title: 'Daag', image: '/works/posters/daag.jpg' },
+        { title: 'Dirty Angels', image: '/works/posters/dirty-angels.png' },
+        { title: 'Flirt', image: '/works/posters/flirt.png' },
+        { title: 'The Garden of Aden', image: '/works/posters/garden-of-aden.png' }
     ]
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentPosterIndex((prev) => (prev + 1) % notablePosters.length)
-        }, 3000)
-        return () => clearInterval(timer)
-    }, [notablePosters.length])
 
     useEffect(() => {
         const video = videoRef.current
@@ -216,6 +212,7 @@ export default function Home() {
                                 src="https://player.vimeo.com/video/1188901517?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;background=1" 
                                 frameBorder="0" 
                                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                                loading="lazy"
                                 className="absolute top-1/2 left-1/2 w-[450%] md:w-[400%] aspect-video -translate-x-1/2 -translate-y-1/2 group-hover:scale-[1.05] transition-transform duration-700 ease-in-out pointer-events-none z-0"
                                 title="cities/medinas"
                             ></iframe>
@@ -234,6 +231,7 @@ export default function Home() {
                                 src="https://player.vimeo.com/video/1188901927?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;background=1" 
                                 frameBorder="0" 
                                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                                loading="lazy"
                                 className="absolute top-1/2 left-1/2 w-[350%] md:w-[250%] aspect-video -translate-x-1/2 -translate-y-1/2 group-hover:scale-105 transition-transform duration-700 ease-in-out pointer-events-none z-0"
                                 title="desert/oasis"
                             ></iframe>
@@ -252,6 +250,7 @@ export default function Home() {
                                 src="https://player.vimeo.com/video/1188900875?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;background=1" 
                                 frameBorder="0" 
                                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                                loading="lazy"
                                 className="absolute top-1/2 left-1/2 w-[350%] md:w-[250%] aspect-video -translate-x-1/2 -translate-y-1/2 group-hover:scale-105 transition-transform duration-700 ease-in-out pointer-events-none z-0"
                                 title="mountains/gorges"
                             ></iframe>
@@ -314,63 +313,32 @@ export default function Home() {
                     </div>
                 </div>
                     
-                <div className="w-full max-w-sm mx-auto relative z-10 px-6 overflow-visible group">
-                    <div className="relative aspect-[2/3] w-full bg-zinc-900 shadow-2xl rounded-sm overflow-hidden border border-black/5">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={currentPosterIndex}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 1.05 }}
-                                transition={{ duration: 0.6, ease: "easeInOut" }}
-                                className="absolute inset-0"
-                            >
-                                <Image 
-                                    src={notablePosters[currentPosterIndex].image} 
-                                    alt={notablePosters[currentPosterIndex].title} 
-                                    fill 
-                                    className="object-cover"
-                                />
-                                <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
-                                    <h3 className="text-white font-serif text-xl tracking-wide uppercase text-center">
-                                        {notablePosters[currentPosterIndex].title}
-                                    </h3>
-                                </div>
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
-
-                    {/* Navigation Arrows */}
-                    <button 
-                        onClick={() => setCurrentPosterIndex((prev) => (prev - 1 + notablePosters.length) % notablePosters.length)}
-                        className="absolute left-4 md:-left-20 top-1/2 -translate-y-1/2 text-black/50 hover:text-[#00AEEF] transition-all duration-300 p-2 z-30 hover:scale-110 active:scale-95 bg-white/50 md:bg-transparent rounded-full backdrop-blur-sm md:backdrop-blur-none"
-                        aria-label="Previous poster"
+                <div className="w-full relative z-10 overflow-hidden mt-12 mb-20 group">
+                    <motion.div 
+                        animate={{ x: ["0%", "-50%"] }}
+                        transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
+                        className="flex gap-4 items-center flex-nowrap"
                     >
-                        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button 
-                        onClick={() => setCurrentPosterIndex((prev) => (prev + 1) % notablePosters.length)}
-                        className="absolute right-4 md:-right-20 top-1/2 -translate-y-1/2 text-black/50 hover:text-[#00AEEF] transition-all duration-300 p-2 z-30 hover:scale-110 active:scale-95 bg-white/50 md:bg-transparent rounded-full backdrop-blur-sm md:backdrop-blur-none"
-                        aria-label="Next poster"
-                    >
-                        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-
-                    {/* Dots */}
-                    <div className="flex justify-center gap-3 mt-10">
-                        {notablePosters.map((_, idx) => (
-                            <button
-                                key={idx}
-                                onClick={() => setCurrentPosterIndex(idx)}
-                                className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${idx === currentPosterIndex ? 'bg-[#00AEEF] w-8' : 'bg-black/10 hover:bg-black/30'}`}
-                                aria-label={`Go to slide ${idx + 1}`}
-                            />
+                        {[...Array(2)].map((_, i) => (
+                            <div key={i} className="flex gap-4 items-center flex-nowrap shrink-0">
+                                {notablePosters.map((poster, idx) => (
+                                    <div key={`${i}-${idx}`} className="relative w-[200px] md:w-[300px] aspect-[2/3] rounded-sm overflow-hidden shadow-2xl border border-white/5 shrink-0 group/poster">
+                                        <Image 
+                                            src={poster.image} 
+                                            alt={poster.title} 
+                                            fill 
+                                            className="object-cover transition-transform duration-700 group-hover/poster:scale-110"
+                                        />
+                                        <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover/poster:opacity-100 transition-opacity duration-500">
+                                            <h3 className="text-white font-serif text-xs md:text-sm tracking-wide uppercase text-center">
+                                                {poster.title}
+                                            </h3>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         ))}
-                    </div>
+                    </motion.div>
                 </div>
 
 

@@ -7,104 +7,155 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Footer from '../../components/layout/Footer';
 
 // --- DATA ---
-const categories = ["All", "Feature Films", "TV", "Commercials", "Music Video"];
+const creditsData = [
+  // TYPE: POSTER (Real Movie/TV Posters)
+  { id: 1, type: 'poster', category: 'Movies', title: 'The Garden of Aden', service: 'Full Service Production', imagePath: '/works/posters/garden-of-aden.png', videoUrl: '/videos/Feature/garden-of-aden.webm' },
+  { id: 2, type: 'poster', category: 'TV', title: 'CIA Confidential', service: 'Locations & Logistics', imagePath: '/works/posters/cia-confidential.jpg', videoUrl: 'https://www.youtube.com/embed/0dF29Bg20a8' },
+  { id: 3, type: 'poster', category: 'Movies', title: 'Aazaan', service: 'Moroccan Production Partner', imagePath: '/works/posters/aazaan.png', videoUrl: 'https://player.vimeo.com/video/75757690?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 4, type: 'poster', category: 'Movies', title: 'Pegasus', service: 'Moroccan Production Partner', imagePath: '/works/posters/pegase.jpg', videoUrl: 'https://player.vimeo.com/video/73678951?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 5, type: 'poster', category: 'Movies', title: 'Midnight Fly', service: 'Production & Locations', imagePath: '/works/posters/midnight-fly.png', videoUrl: 'https://player.vimeo.com/video/81383338?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 6, type: 'poster', category: 'Movies', title: 'Emir', service: 'Full Service Production', imagePath: '/works/posters/emir.jpg', videoUrl: 'https://www.youtube.com/embed/_iUI6Vwf4sw' },
+  { id: 7, type: 'poster', category: 'Movies', title: 'Agent Vinod', service: 'Moroccan Production Partner', imagePath: '/works/posters/agent-vinod.jpg', videoUrl: 'https://player.vimeo.com/video/75757811?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 8, type: 'poster', category: 'TV', title: 'Daag', service: 'Moroccan Production Partner', imagePath: '/works/posters/daag.jpg', videoUrl: 'https://player.vimeo.com/video/74729871?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 9, type: 'poster', category: 'Movies', title: 'Dirty Angels', service: 'Full Service Production', imagePath: '/works/posters/dirty-angels.png', videoUrl: 'https://www.youtube.com/embed/YBwoSa3n8Yc' },
+  { id: 10, type: 'poster', category: 'Movies', title: 'The Walk', service: 'Moroccan Production Partner', imagePath: '/works/posters/the-walk.png', videoUrl: 'https://www.youtube.com/embed/4eQdoP7aRk4' },
+  { id: 11, type: 'poster', category: 'Movies', title: 'Black Angel', service: 'Location & Logistics', imagePath: '/works/posters/black-angel.jpg', videoUrl: 'https://www.youtube.com/embed/dIE_56C9z4k' },
+  { id: 12, type: 'poster', category: 'TV', title: 'Clash of the Gods', service: 'Location Scouting & Crew', imagePath: '/works/posters/clash-of-the-gods.jpg', videoUrl: 'https://player.vimeo.com/video/73394982?h=f0a1ba5147' },
+  { id: 13, type: 'poster', category: 'Movies', title: 'Flirt', service: 'Production Services', imagePath: '/works/posters/flirt.png', videoUrl: 'https://www.youtube.com/embed/msOnGTQtA9E' },
+  { id: 14, type: 'poster', category: 'Movies', title: 'Okuotoko', service: 'Full Service Production', imagePath: '/works/posters/okuotoko.jpg', videoUrl: 'https://www.youtube.com/embed/gw_G8IKw6dA' },
+  { id: 27, type: 'poster', category: 'TV', title: 'Kingdom of David', service: 'Production Services', imagePath: '/works/posters/kingdom.webp', videoUrl: 'https://player.vimeo.com/video/74823824?badge=0&autopause=0&player_id=0&app_id=58479' },
 
-const projects = [
-  { id: 1, title: "Aazaan", category: "Feature Films", role: 'Moroccan Production Partner', image: "/works/posters/aazaan.png", videoUrl: "/videos/Feature/aazaan.webm" },
-  { id: 2, title: "Pegasus", category: "Feature Films", role: 'Moroccan Production Partner', image: "/works/posters/pegase.jpg", videoUrl: "/videos/Feature/pegasus.webm" },
-  { id: 3, title: "Midnight Fly", category: "Feature Films", role: 'Production & Locations', image: "/works/posters/midnight-fly.png", videoUrl: "/videos/Feature/midnight-fly.webm" },
-  { id: 4, title: "Emir", category: "Feature Films", role: 'Full Service Production', image: "/works/posters/emir.jpg", videoUrl: "/videos/Feature/emir.webm" },
-  { id: 5, title: "Agent Vinod", category: "Feature Films", role: 'Moroccan Production Partner', image: "/works/posters/agent-vinod.jpg", videoUrl: "/videos/Feature/agent-vinod.webm" },
-  { id: 6, title: "Daag", category: "TV", role: 'Moroccan Production Partner', image: "/works/posters/daag.jpg", videoUrl: "/works/tv/dag.webm" },
-  { id: 7, title: "Dirty Angels", category: "Feature Films", role: 'Full Service Production', image: "/works/posters/dirty-angels.png", videoUrl: "/videos/Feature/dirty-angels.webm" },
-  { id: 8, title: "The Walk", category: "Feature Films", role: 'Moroccan Production Partner', image: "/works/posters/the-walk.png", videoUrl: "/videos/Feature/the-walk.webm" },
-  { id: 9, title: "Black Angel", category: "Feature Films", role: 'Location & Logistics', image: "/works/posters/black-angel.jpg", videoUrl: "/videos/Feature/black-angel.webm" },
-  { id: 10, title: "Clash of the Gods", category: "TV", role: 'Location Scouting & Crew', image: "/works/posters/clash-of-the-gods.jpg", videoUrl: "/works/tv/dag.webm" },
-  { id: 11, title: "Flirt", category: "Feature Films", role: 'Production Services', image: "/works/posters/flirt.png", videoUrl: "/videos/Feature/flirt.webm" },
-  { id: 12, title: "Okuotoko", category: "Feature Films", role: 'Full Service Production', image: "/works/posters/okuotoko.jpg", videoUrl: "/videos/Feature/okuotoko.webm" },
-  { id: 13, title: "Garden of Aden", category: "Feature Films", role: 'Full Service Production', image: "/works/posters/garden-of-aden.png", videoUrl: "/videos/Feature/garden-of-aden.webm" },
-  { id: 14, title: "CIA Confidential", category: "TV", role: 'Location & Logistics', image: "/works/posters/cia-confidential.jpg", videoUrl: "/works/tv/cia-confidential.webm" },
+  // TYPE: LOGO-POSTER (Brands & Networks)
+  { id: 15, type: 'logo-poster', category: 'TV', title: 'National Geographic', service: 'Production Logistics', logoPath: '/clients/NATIONALGEOGRAPHIC.png', videoUrl: 'https://player.vimeo.com/video/73395201?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 16, type: 'logo-poster', category: 'TV', title: 'History Channel', service: 'Production Support', logoPath: '/works/logo/NATIONALGEOGRAPHIC.png', videoUrl: 'https://player.vimeo.com/video/73395048?h=545a256bad' },
+  { id: 17, type: 'logo-poster', category: 'Commercials', title: 'BMW', service: 'Full Service Production', logoPath: '/works/logo/bmw.svg', videoUrl: 'https://player.vimeo.com/video/153900606?h=6a9189553e' },
+  { id: 18, type: 'logo-poster', category: 'Commercials', title: 'FIFA', service: 'Locations & Logistics', logoPath: '/works/logo/fifaapproved_newlogo.jpg', videoUrl: 'https://player.vimeo.com/video/74216401?h=891b478be7' },
+  { id: 19, type: 'logo-poster', category: 'Commercials', title: 'Honda', service: 'Full Service Production', logoPath: '/works/logo/honda.png', videoUrl: 'https://player.vimeo.com/video/67670234?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 20, type: 'logo-poster', category: 'Commercials', title: 'Airtel', service: 'Production Support', logoPath: '/works/logo/airtel.jpeg', videoUrl: 'https://player.vimeo.com/video/67669045?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 21, type: 'logo-poster', category: 'TV', title: 'Netflix - Cooked', service: 'Production Services', logoPath: '/clients/netflix.png', videoUrl: 'https://player.vimeo.com/video/154862129?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 22, type: 'logo-poster', category: 'Commercials', title: 'Bajaj', service: 'Production Support', logoPath: '/works/logo/newBajajlogo.webp', videoUrl: 'https://player.vimeo.com/video/67669216?h=3bbb55f7f0' },
+  { id: 23, type: 'logo-poster', category: 'Commercials', title: 'Hugo Boss', service: 'Production Support', logoPath: '/clients/3.png', videoUrl: 'https://player.vimeo.com/video/153925079?h=34fbfbff15' },
+  { id: 24, type: 'logo-poster', category: 'Commercials', title: 'TUI', service: 'Production Services', logoPath: '/works/logo/Untitled (9).png', videoUrl: 'https://player.vimeo.com/video/153907298?h=770c9bb9ac' },
 
-  // --- TV ---
-  { id: 15, title: "Egypt Underworld", category: "TV", role: 'Production Support', image: "/works/egypt-underworld.png", videoUrl: "/works/tv/egypt-underworld.webm" },
-  { id: 16, title: "Kingdom of David", category: "TV", role: 'Locations & Logistics', image: "/works/kingdom-of-david.jpg", videoUrl: "/works/tv/kingdom-of-david.webm" },
-  { id: 17, title: "Lets Shop", category: "TV", role: 'Production Services', image: "/works/lets-shop.jpg", videoUrl: "/works/tv/lets-shop.webm" },
-  { id: 18, title: "Stranded with Peter", category: "TV", role: 'Local Fixer', image: "/works/stranded-with-peter.jpg", videoUrl: "/works/tv/stranded-with-peter.webm" },
-  { id: 19, title: "The Battle of Tripoli", category: "TV", role: 'Production Logistics', image: "/works/the-battle-of-tripoli.jpg", videoUrl: "/works/tv/the-battle-of-tripoli.webm" },
-
-  // --- COMMERCIALS ---
-  { id: 20, title: "Airtel", category: "Commercials", role: 'Production Services', image: "/works/airtel.jpg", videoUrl: "/works/commercial/airtel.webm" },
-  { id: 21, title: "Bajaj", category: "Commercials", role: 'Production Support', image: "/works/bajaj.jpg", videoUrl: "/works/commercial/bajaj.webm" },
-  { id: 22, title: "Baloise Assurance", category: "Commercials", role: 'Locations & Scouting', image: "/works/baloise-assurance.jpg", videoUrl: "/works/commercial/baloise-assurance.webm" },
-  { id: 23, title: "BMW", category: "Commercials", role: 'Full Service Production', image: "/works/bmw.png", videoUrl: "/works/commercial/bmw.webm" },
-  { id: 24, title: "COMVIQ", category: "Commercials", role: 'Production Services', image: "/works/comviq.jpg", videoUrl: "/works/commercial/comviq.webm" },
-  { id: 25, title: "FIFA", category: "Commercials", role: 'Locations & Logistics', image: "/works/fifa-anti-discrimination.png", videoUrl: "/works/commercial/fifa-anti-discrimination.webm" },
-  { id: 26, title: "Grand Prix", category: "Commercials", role: 'Production Services', image: "/works/grand-prix-de-larc-de-triomphe.jpg", videoUrl: "/works/commercial/grand-prix-de-larc-de-triomphe.webm" },
-  { id: 27, title: "Honda", category: "Commercials", role: 'Full Service Production', image: "/works/honda.png", videoUrl: "/works/commercial/honda.webm" },
-  { id: 28, title: "Hugo Boss", category: "Commercials", role: 'Production Support', image: "/works/hugo-boss.png", videoUrl: "/works/commercial/hugo-boss.webm" },
-  { id: 29, title: "Life Platinum", category: "Commercials", role: 'Locations & Logistics', image: "/works/life-platinum.jpg", videoUrl: "/works/commercial/life-platinum.webm" },
-  { id: 30, title: "Livon Silk Oil", category: "Commercials", role: 'Production Services', image: "/works/livon-silk-oil.jpg", videoUrl: "/works/commercial/livon-silk-oil.webm" },
-  { id: 31, title: "The Pyramids", category: "Commercials", role: 'Locations & Scouting', image: "/works/the-pyramids---amf-hd.jpg", videoUrl: "/works/commercial/the-pyramids---amf-hd.webm" },
-  { id: 32, title: "Tine Piano", category: "Commercials", role: 'Production Support', image: "/works/tine-piano.jpg", videoUrl: "/works/commercial/tine-piano.webm" },
-  { id: 33, title: "Toro", category: "Commercials", role: 'Full Service Production', image: "/works/toro.jpg", videoUrl: "/works/commercial/toro.webm" },
-  { id: 34, title: "TUI", category: "Commercials", role: 'Production Services', image: "/works/tui.jpg", videoUrl: "/works/commercial/tui.mp4" },
-  { id: 35, title: "Ulala Mango", category: "Commercials", role: 'Locations & Logistics', image: "/works/ulala-mango.jpg", videoUrl: "/works/commercial/ulala-mango.webm" },
-
-  // --- MUSIC VIDEO ---
-  { id: 36, title: "Despina Vandi", category: "Music Video", role: 'Production Services', image: "/works/despina-vandi.jpg", videoUrl: "/works/music/despina-vandi.webm" }
+  { id: 29, type: 'logo-poster', category: 'Music Video', title: 'FUJI', service: 'Production Services', logoPath: '/works/logo/logo.music.jpg', videoUrl: '/works/music/despina-vandi.webm' },
+  { id: 30, type: 'logo-poster', category: 'Commercials', title: 'The Pyramids', service: 'Production Services', logoPath: '/works/logo/amf-logo.svg', videoUrl: 'https://player.vimeo.com/video/169683333?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 31, type: 'logo-poster', category: 'Commercials', title: 'Bâloise', service: 'Production Support', logoPath: '/works/logo/brand.gif', videoUrl: 'https://player.vimeo.com/video/154871597?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 32, type: 'logo-poster', category: 'Commercials', title: 'Toro', service: 'Full Service Production', logoPath: '/works/logo/logo.png', videoUrl: 'https://player.vimeo.com/video/154879644?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 33, type: 'logo-poster', category: 'Commercials', title: 'Livon Silk Oil', service: 'Production Support', logoPath: '/works/logo/new-logo-pink.webp', videoUrl: 'https://player.vimeo.com/video/153907005?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 34, type: 'logo-poster', category: 'Commercials', title: 'Mango', service: 'Production Support', logoPath: '/works/logo/Mango-logo.png', videoUrl: 'https://player.vimeo.com/video/153911251?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 35, type: 'logo-poster', category: 'TV', title: 'Let Me Shop', service: 'Production Services', logoPath: '/works/logo/Untitled (8).png', videoUrl: 'https://player.vimeo.com/video/73678926?h=bcb5955886' }
 ];
+
+const categories = ["All", "Movies", "TV", "Commercials", "Music Video"];
 
 // --- COMPONENTS ---
 
-function PosterCard({ project, onOpenVideo }: { project: typeof projects[number], onOpenVideo: (url: string) => void }) {
+function CreditCard({ project, onOpenVideo }: { project: typeof creditsData[number], onOpenVideo: (url: string) => void }) {
+  const isLogoPoster = project.type === 'logo-poster';
+
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.3 }}
-      className="relative aspect-[2/3] overflow-hidden rounded-sm bg-zinc-950 group cursor-pointer"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.05 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="relative aspect-[2/3] overflow-hidden rounded-sm bg-[#0a0a0a] group cursor-pointer border border-white/5"
       onClick={() => onOpenVideo(project.videoUrl)}
     >
-      <Image
-        src={project.image}
-        alt={`${project.title} Poster`}
-        fill
-        sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-        className="object-contain transition-transform duration-700 ease-out group-hover:scale-105"
-      />
-
-      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-      <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-400 ease-out" />
-
-      <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out">
-        <span className="text-[#00AEEF] text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block">
+      {/* Category Tag */}
+      <div className="absolute top-4 left-4 z-30">
+        <span className="bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-[0.2em] text-[#00AEEF]">
           {project.category}
         </span>
-        <h3 className="text-white font-serif text-xl md:text-2xl uppercase leading-tight tracking-wide mb-3">
-          {project.title}
-        </h3>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-px bg-[#00AEEF]" />
-          <span className="text-zinc-400 text-[11px] uppercase tracking-wider">
-            {project.role}
-          </span>
-        </div>
       </div>
 
-      <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#00AEEF] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {isLogoPoster ? (
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-8 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)]">
+          <div className="relative w-3/5 aspect-square flex items-center justify-center">
+            <Image
+              src={project.logoPath || ''}
+              alt={`${project.title} Logo`}
+              fill
+              className="object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+              style={['Hugo Boss', 'FUJI', 'Mango'].includes(project.title) ? { 
+                filter: 'grayscale(1) invert(1) brightness(1.8)',
+                mixBlendMode: 'screen'
+              } : {}}
+            />
+          </div>
+          
+          <div className="absolute bottom-8 left-0 right-0 text-center px-4">
+            <p className="text-[9px] text-zinc-500 font-bold tracking-[0.3em] uppercase">
+              {project.service}
+            </p>
+          </div>
+        </div>
+      ) : (
+        <>
+          <Image
+            src={project.imagePath || ''}
+            alt={`${project.title} Poster`}
+            fill
+            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          />
+          {/* Default Title Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500 flex flex-col justify-end p-4">
+            <h3 className="text-white font-serif text-sm uppercase tracking-wider mb-1">
+              {project.title}
+            </h3>
+            <span className="text-[#00AEEF] text-[8px] font-bold uppercase tracking-widest">
+              {project.category}
+            </span>
+          </div>
+
+          {/* Detailed Info on Hover */}
+          <div className="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-center p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 z-20">
+            <h3 className="text-white font-serif text-2xl uppercase leading-tight tracking-wide mb-3">
+              {project.title}
+            </h3>
+            <div className="flex flex-col items-center gap-3">
+              <div className="w-8 h-px bg-[#00AEEF]" />
+              <span className="text-zinc-300 text-[10px] font-bold uppercase tracking-[0.3em]">
+                {project.service}
+              </span>
+              <div className="mt-4 px-4 py-2 border border-white/20 text-white text-[8px] font-bold tracking-widest hover:bg-white hover:text-black transition-colors">
+                WATCH TRAILER
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-[#00AEEF]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </motion.div>
   );
 }
+
 
 export default function CreditsClient() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const filteredProjects = activeCategory === "All" 
-    ? projects 
-    : projects.filter(p => p.category === activeCategory);
+  const categoryPriority: Record<string, number> = {
+    'Movies': 1,
+    'TV': 2,
+    'Commercials': 3,
+    'Music Video': 4
+  };
+
+  const filteredProjects = [...creditsData]
+    .filter(p => activeCategory === "All" || p.category === activeCategory)
+    .sort((a, b) => {
+      // First sort by category priority
+      const prioA = categoryPriority[a.category] || 99;
+      const prioB = categoryPriority[b.category] || 99;
+      if (prioA !== prioB) return prioA - prioB;
+      // Then sort by title
+      return a.title.localeCompare(b.title);
+    });
 
   return (
     <main className="bg-black text-zinc-400 min-h-screen font-sans selection:bg-[#00AEEF] selection:text-black overflow-x-hidden">
@@ -124,14 +175,23 @@ export default function CreditsClient() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-6xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl"
+              className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl"
             >
-              <video 
-                src={activeVideo} 
-                controls 
-                autoPlay 
-                className="w-full h-full object-contain bg-black outline-none"
-              />
+              {activeVideo.includes('youtube.com') || activeVideo.includes('vimeo.com') ? (
+                <iframe
+                  src={activeVideo}
+                  className="w-full h-full border-0"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  allowFullScreen
+                />
+              ) : (
+                <video 
+                  src={activeVideo} 
+                  controls 
+                  autoPlay 
+                  className="w-full h-full object-contain bg-black outline-none"
+                />
+              )}
             </motion.div>
           </div>
         )}
@@ -170,7 +230,7 @@ export default function CreditsClient() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="block text-[#00AEEF] text-[10px] md:text-xs tracking-[0.5em] uppercase font-bold mb-6"
           >
-            Dreamaker Productions — Filmography
+            Dreamaker Productions — Portfolio
           </motion.span>
 
           <motion.h1
@@ -179,7 +239,7 @@ export default function CreditsClient() {
             transition={{ delay: 0.5, duration: 1 }}
             className="text-5xl md:text-7xl lg:text-8xl font-serif text-white uppercase tracking-widest leading-none mb-8"
           >
-            FEATURED
+            GLOBAL
             <br />
             <span className="italic font-medium tracking-[0.05em]">CREDITS</span>
           </motion.h1>
@@ -223,7 +283,7 @@ export default function CreditsClient() {
           >
             <div className="h-px flex-1 bg-zinc-800" />
             <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-600">
-              {filteredProjects.length} {activeCategory} Productions
+              {activeCategory === 'All' ? 'Complete Portfolio' : `${filteredProjects.length} ${activeCategory} Productions`}
             </span>
             <div className="h-px flex-1 bg-zinc-800" />
           </motion.div>
@@ -231,11 +291,11 @@ export default function CreditsClient() {
           {/* Animated Grid */}
           <motion.div 
             layout
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-2 md:p-8"
           >
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project) => (
-                <PosterCard 
+                <CreditCard 
                   key={project.id} 
                   project={project} 
                   onOpenVideo={(url) => setActiveVideo(url)} 
@@ -245,6 +305,7 @@ export default function CreditsClient() {
           </motion.div>
         </div>
       </section>
+
 
       {/* Footer CTA */}
       <section className="relative py-24 md:py-36 px-6 bg-zinc-950 border-t border-white/5 overflow-hidden">

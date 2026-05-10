@@ -2,23 +2,19 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Send, Loader2, Bot, User } from 'lucide-react'
+import { X, Send, Loader2, User } from 'lucide-react'
 
 interface Message {
-    role: 'user' | 'assistant' | 'system'
+    role: 'user' | 'assistant'
     content: string
 }
 
-const SYSTEM_PROMPT = `You are an expert producer for Dreamaker Productions. Respond INSTANTLY. Do not use filler words like "Certainly" or "I understand". Go straight to the point in 2 short sentences using info from the catalog. Efficiency is your priority.
-Emphasize "Visual Sophistication" and "Attention to Detail". 
-Focus on the 20% Cash Rebate in Morocco as the key commercial advantage.
-Primary language: English (but always respond in the language used by the interlocutor).`
-
 const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
     const [messages, setMessages] = useState<Message[]>([])
-    const [input, setInput] = useState('')
+    const [localInput, setLocalInput] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const scrollRef = useRef<HTMLDivElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -26,75 +22,46 @@ const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void 
         }
     }, [messages])
 
-    const handleSend = async () => {
-        if (!input.trim() || isLoading) return
+    // Focus input when chat opens
+    useEffect(() => {
+        if (isOpen && inputRef.current) {
+            setTimeout(() => inputRef.current?.focus(), 300)
+        }
+    }, [isOpen])
 
-        const userMessage: Message = { role: 'user', content: input }
-        setMessages(prev => [...prev, userMessage])
-        setInput('')
+    const handleSend = async (e: React.FormEvent) => {
+        e.preventDefault()
+        const trimmed = localInput.trim()
+        if (!trimmed || isLoading) return
+
+        const userMessage: Message = { role: 'user', content: trimmed }
+        const newMessages: Message[] = [...messages, userMessage]
+        setMessages(newMessages)
+        setLocalInput('')
         setIsLoading(true)
 
         try {
-            const response = await fetch("/api/chat", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    model: "meta/llama-3.1-70b-instruct",
-                    messages: [
-                        { role: "system", content: SYSTEM_PROMPT },
-                        ...messages,
-                        userMessage
-                    ],
-                    temperature: 0.2,
-                    top_p: 0.7,
-                    max_tokens: 1024,
-                    stream: true
-                })
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ messages: newMessages }),
             })
 
-            if (!response.body) throw new Error("No response body")
-
-            const reader = response.body.getReader()
-            const decoder = new TextDecoder()
-            let assistantContent = ""
-
-            setMessages(prev => [...prev, { role: 'assistant', content: "" }])
-
-            while (true) {
-                const { done, value } = await reader.read()
-                if (done) break
-
-                const chunk = decoder.decode(value)
-                const lines = chunk.split('\n')
-
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        const jsonStr = line.replace('data: ', '').trim()
-                        if (jsonStr === '[DONE]') break
-                        try {
-                            const json = JSON.parse(jsonStr)
-                            const delta = json.choices[0].delta?.content || ""
-                            assistantContent += delta
-                            setMessages(prev => {
-                                const newMessages = [...prev]
-                                if (newMessages.length > 0) {
-                                    newMessages[newMessages.length - 1].content = assistantContent
-                                }
-                                return newMessages
-                            })
-                        } catch (e) {
-                            // Incomplete chunk
-                        }
-                    }
-                }
+            if (!response.ok) {
+                const errData = await response.json().catch(() => ({}))
+                console.error('API error:', errData)
+                throw new Error('API error')
             }
+
+            const data = await response.json()
+            const content = data.content || 'Sorry, I did not get a response.'
+            setMessages(prev => [...prev, { role: 'assistant', content }])
         } catch (error) {
-            console.error("Chat Error:", error)
-            setMessages(prev => [...prev, { role: 'assistant', content: "I encountered an error. Please try again or contact us directly." }])
+            console.error('Chat Error:', error)
+            setMessages(prev => [...prev, { role: 'assistant', content: 'I encountered an error. Please try again or contact us directly.' }])
         } finally {
             setIsLoading(false)
+            inputRef.current?.focus()
         }
     }
 
@@ -163,7 +130,7 @@ const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void 
                                 )}
                             </motion.div>
                         ))}
-                        {isLoading && (
+                        {isLoading && messages[messages.length - 1]?.content === '' && (
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start items-center gap-2">
                                 <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center overflow-hidden border border-white/5">
                                     <img src="/favicon.svg" alt="AI Silhouette" className="w-full h-full object-contain animate-pulse scale-125" />
@@ -177,23 +144,23 @@ const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void 
 
                     {/* Input Area */}
                     <div className="p-4 border-t border-white/5 bg-black/40">
-                        <div className="relative flex items-center">
+                        <form onSubmit={handleSend} className="relative flex items-center">
                             <input
+                                ref={inputRef}
                                 type="text"
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                                value={localInput}
+                                onChange={(e) => setLocalInput(e.target.value)}
                                 placeholder="Message..."
                                 className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-4 pr-12 text-xs font-medium focus:outline-none focus:border-blue-500/50 transition-all"
                             />
                             <button
-                                onClick={handleSend}
-                                disabled={!input.trim() || isLoading}
+                                type="submit"
+                                disabled={!localInput.trim() || isLoading}
                                 className="absolute right-2 p-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:hover:bg-blue-600"
                             >
                                 <Send size={14} />
                             </button>
-                        </div>
+                        </form>
                     </div>
                 </motion.div>
             )}
