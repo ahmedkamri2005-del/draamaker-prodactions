@@ -1,9 +1,11 @@
 import { Resend } from 'resend';
-import { NextRequest, NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { openai } from '@ai-sdk/openai';
+import { streamText, Message } from 'ai';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const openai = new OpenAI({
+
+// Create NVIDIA client using OpenAI compatible provider
+const nvidia = openai('', {
   apiKey: process.env.NVIDIA_API_KEY,
   baseURL: 'https://integrate.api.nvidia.com/v1',
 });
@@ -34,69 +36,52 @@ KNOWLEDGE BASE ABOUT DREAMAKER PRODUCTIONS:
 Tone: Professional, cinematic, concise. Primary language is English, but always match the user language.
 `;
 
-interface Message {
-  role: 'user' | 'assistant' | 'system';
-  content: string;
-}
+export async function POST(req: Request) {
+  const { messages }: { messages: Message[] } = await req.json();
 
-export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json();
-    const { messages }: { messages: Message[] } = body;
+  const result = await streamText({
+    model: nvidia('meta/llama-3.3-70b-instruct'),
+    messages: [
+      { role: 'system', content: SYSTEM_PROMPT },
+      ...messages,
+    ],
+    temperature: 0.7,
+    onFinish: async (event) => {
+      // Check if all 3 lead fields are present to send email
+      const fullConversation = [...messages, { role: 'assistant', content: event.text }]
+        .map((m) => m.content)
+        .join(' ');
+        
+      const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+      const hasEmail = emailRegex.test(fullConversation);
+      const hasName = messages.some(
+        (m) => m.role === 'user' && m.content.split(' ').length >= 2
+      );
+      const services = ['equipment', 'location', 'production', 'soundstage', 'studio', 'crew', 'talent'];
+      const hasService = services.some((s) =>
+        fullConversation.toLowerCase().includes(s)
+      );
 
-    const response = await openai.chat.completions.create({
-      model: 'z-ai/glm-5.1',
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        ...messages,
-      ],
-      temperature: 0.7,
-      max_tokens: 500,
-    });
-
-    const assistantMessage = response.choices[0].message;
-    const content = assistantMessage.content || '';
-
-    // Check if all 3 lead fields are present in conversation to send email
-    const fullConversation = messages.map((m) => m.content).join(' ');
-    const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
-    const hasEmail = emailRegex.test(fullConversation);
-    const hasName = messages.some(
-      (m) => m.role === 'user' && m.content.split(' ').length >= 2
-    );
-    const services = ['equipment', 'location', 'production', 'soundstage', 'studio', 'crew', 'talent'];
-    const hasService = services.some((s) =>
-      fullConversation.toLowerCase().includes(s)
-    );
-
-    if (hasEmail && hasName && hasService && messages.length <= 8) {
-      const emailMatch = fullConversation.match(emailRegex);
-      try {
-        await resend.emails.send({
-          from: 'Dreamaker AI <onboarding@resend.dev>',
-          to: 'ahmed.kamri2005@gmail.com',
-          subject: `🔥 New Lead from Website Chat`,
-          html: `
-            <h2>New Lead from the AI Chat!</h2>
-            <p><strong>Conversation snippet:</strong></p>
-            <pre style="background:#111;color:#fff;padding:16px;border-radius:8px;">${messages
-              .slice(-6)
-              .map((m) => `[${m.role.toUpperCase()}]: ${m.content}`)
-              .join('\n\n')}</pre>
-            <p><strong>Detected email:</strong> ${emailMatch?.[0] || 'N/A'}</p>
-          `,
-        });
-      } catch (emailErr) {
-        console.error('Email send failed:', emailErr);
+      if (hasEmail && hasName && hasService && messages.length <= 10) {
+        const emailMatch = fullConversation.match(emailRegex);
+        try {
+          await resend.emails.send({
+            from: 'Dreamaker AI <onboarding@resend.dev>',
+            to: 'ahmed.kamri2005@gmail.com',
+            subject: `🔥 New Lead from Website Chat`,
+            html: `
+              <h2>New Lead from the AI Chat!</h2>
+              <p><strong>Detected email:</strong> ${emailMatch?.[0] || 'N/A'}</p>
+              <p><strong>Conversation Context:</strong></p>
+              <pre style="background:#111;color:#fff;padding:16px;border-radius:8px;">${fullConversation.slice(-500)}</pre>
+            `,
+          });
+        } catch (emailErr) {
+          console.error('Email send failed:', emailErr);
+        }
       }
-    }
+    },
+  });
 
-    return NextResponse.json({ content });
-  } catch (error: any) {
-    console.error('Chat API Error:', error?.message || error);
-    return NextResponse.json(
-      { error: 'Something went wrong', details: error?.message },
-      { status: 500 }
-    );
-  }
+  return result.toDataStreamResponse();
 }

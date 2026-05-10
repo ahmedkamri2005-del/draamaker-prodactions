@@ -1,26 +1,24 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Send, Loader2, User } from 'lucide-react'
-
-interface Message {
-    role: 'user' | 'assistant'
-    content: string
-}
+import { useChat } from '@ai-sdk/react'
 
 const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
-    const [messages, setMessages] = useState<Message[]>([])
-    const [localInput, setLocalInput] = useState('')
-    const [isLoading, setIsLoading] = useState(false)
+    const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+        api: '/api/chat',
+    })
+    
     const scrollRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
 
+    // Auto scroll to bottom
     useEffect(() => {
         if (scrollRef.current) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight
         }
-    }, [messages])
+    }, [messages, isLoading])
 
     // Focus input when chat opens
     useEffect(() => {
@@ -28,42 +26,6 @@ const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void 
             setTimeout(() => inputRef.current?.focus(), 300)
         }
     }, [isOpen])
-
-    const handleSend = async (e: React.FormEvent) => {
-        e.preventDefault()
-        const trimmed = localInput.trim()
-        if (!trimmed || isLoading) return
-
-        const userMessage: Message = { role: 'user', content: trimmed }
-        const newMessages: Message[] = [...messages, userMessage]
-        setMessages(newMessages)
-        setLocalInput('')
-        setIsLoading(true)
-
-        try {
-            const response = await fetch('/api/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ messages: newMessages }),
-            })
-
-            if (!response.ok) {
-                const errData = await response.json().catch(() => ({}))
-                console.error('API error:', errData)
-                throw new Error('API error')
-            }
-
-            const data = await response.json()
-            const content = data.content || 'Sorry, I did not get a response.'
-            setMessages(prev => [...prev, { role: 'assistant', content }])
-        } catch (error) {
-            console.error('Chat Error:', error)
-            setMessages(prev => [...prev, { role: 'assistant', content: 'I encountered an error. Please try again or contact us directly.' }])
-        } finally {
-            setIsLoading(false)
-            inputRef.current?.focus()
-        }
-    }
 
     return (
         <AnimatePresence>
@@ -107,7 +69,7 @@ const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void 
                         )}
                         {messages.map((msg, i) => (
                             <motion.div
-                                key={i}
+                                key={msg.id || i}
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} items-end gap-2`}
@@ -130,7 +92,7 @@ const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void 
                                 )}
                             </motion.div>
                         ))}
-                        {isLoading && messages[messages.length - 1]?.content === '' && (
+                        {isLoading && messages[messages.length - 1]?.role !== 'assistant' && (
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start items-center gap-2">
                                 <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center overflow-hidden border border-white/5">
                                     <img src="/favicon.svg" alt="AI Silhouette" className="w-full h-full object-contain animate-pulse scale-125" />
@@ -144,18 +106,18 @@ const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void 
 
                     {/* Input Area */}
                     <div className="p-4 border-t border-white/5 bg-black/40">
-                        <form onSubmit={handleSend} className="relative flex items-center">
+                        <form onSubmit={handleSubmit} className="relative flex items-center">
                             <input
                                 ref={inputRef}
                                 type="text"
-                                value={localInput}
-                                onChange={(e) => setLocalInput(e.target.value)}
+                                value={input}
+                                onChange={handleInputChange}
                                 placeholder="Message..."
                                 className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-4 pr-12 text-xs font-medium focus:outline-none focus:border-blue-500/50 transition-all"
                             />
                             <button
                                 type="submit"
-                                disabled={!localInput.trim() || isLoading}
+                                disabled={!input.trim() || isLoading}
                                 className="absolute right-2 p-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:hover:bg-blue-600"
                             >
                                 <Send size={14} />
