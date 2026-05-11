@@ -5,14 +5,14 @@ import { Resend } from 'resend';
 
 export const dynamic = 'force-dynamic';
 
-const nvidia = createOpenAI({
-  apiKey: process.env.NVIDIA_API_KEY,
-  baseURL: 'https://integrate.api.nvidia.com/v1',
-});
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: Request) {
+  const nvidia = createOpenAI({
+    apiKey: process.env.NVIDIA_API_KEY,
+    baseURL: 'https://integrate.api.nvidia.com/v1',
+  });
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   try {
     const { messages }: { messages: UIMessage[] } = await req.json();
     
