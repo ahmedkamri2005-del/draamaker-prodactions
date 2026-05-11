@@ -21,13 +21,13 @@ export default function Home() {
     const videoRef = useRef<HTMLVideoElement>(null)
 
     const notablePosters = [
-        { title: 'Azzan', image: '/works/posters/aazaan.png' },
+        { title: 'Azzan', image: '/works/posters/Aazaan.png' },
         { title: 'Agent Vinod', image: '/works/posters/agent-vinod.jpg' },
         { title: 'Black Angel', image: '/works/posters/black-angel.jpg' },
         { title: 'CIA Confidential', image: '/works/posters/cia-confidential.jpg' },
-        { title: 'Daag', image: '/works/posters/daag.jpg' },
+        { title: 'Daag', image: '/works/posters/DAAG.jpg' },
         { title: 'Dirty Angels', image: '/works/posters/dirty-angels.png' },
-        { title: 'Flirt', image: '/works/posters/flirt.png' },
+        { title: 'Flirt', image: '/works/posters/Flirt.png' },
         { title: 'The Garden of Aden', image: '/works/posters/garden-of-aden.png' }
     ]
 
