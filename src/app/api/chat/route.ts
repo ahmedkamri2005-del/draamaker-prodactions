@@ -3,6 +3,8 @@ import { createOpenAI } from '@ai-sdk/openai';
 import { z } from 'zod';
 import { Resend } from 'resend';
 
+export const dynamic = 'force-dynamic';
+
 const nvidia = createOpenAI({
   apiKey: process.env.NVIDIA_API_KEY,
   baseURL: 'https://integrate.api.nvidia.com/v1',
