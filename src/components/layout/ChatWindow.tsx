@@ -6,9 +6,7 @@ import { X, Send, Loader2, User } from 'lucide-react'
 import { useChat } from '@ai-sdk/react'
 
 const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
-    const { messages, sendMessage, status } = useChat({
-        maxSteps: 5,
-    })
+    const { messages, sendMessage, status } = useChat({})
     
     const [input, setInput] = useState('')
     const isLoading = status === 'submitted' || status === 'streaming'
