@@ -21,7 +21,7 @@ export default function Home() {
     const videoRef = useRef<HTMLVideoElement>(null)
 
     const notablePosters = [
-        { title: 'Aazaan', image: '/works/posters/aazaan.png' },
+        { title: 'Azzan', image: '/works/posters/aazaan.png' },
         { title: 'Agent Vinod', image: '/works/posters/agent-vinod.jpg' },
         { title: 'Black Angel', image: '/works/posters/black-angel.jpg' },
         { title: 'CIA Confidential', image: '/works/posters/cia-confidential.jpg' },

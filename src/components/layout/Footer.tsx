@@ -21,9 +21,9 @@ const exploreLinks = [
 ]
 
 const socialLinks = [
-    { label: 'Instagram', icon: <Instagram size={20} strokeWidth={1.5} />, href: '#' },
-    { label: 'Vimeo', icon: <VimeoIcon size={18} />, href: '#' },
-    { label: 'LinkedIn', icon: <Linkedin size={20} strokeWidth={1.5} />, href: '#' },
+    { label: 'Instagram', icon: <Instagram size={20} strokeWidth={1.5} />, href: 'https://www.instagram.com/dreamaker_prod' },
+    { label: 'Vimeo', icon: <VimeoIcon size={18} />, href: 'https://vimeo.com/dreamakerproductions' },
+    { label: 'LinkedIn', icon: <Linkedin size={20} strokeWidth={1.5} />, href: 'https://www.linkedin.com/company/dreamaker-productions/?originalSubdomain=ma' },
 ]
 
 /* ─── Component ─── */

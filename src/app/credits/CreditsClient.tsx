@@ -11,7 +11,7 @@ const creditsData = [
   // TYPE: POSTER (Real Movie/TV Posters)
   { id: 1, type: 'poster', category: 'Movies', title: 'The Garden of Aden', service: 'Full Service Production', imagePath: '/works/posters/garden-of-aden.png', videoUrl: '/videos/Feature/garden-of-aden.webm' },
   { id: 2, type: 'poster', category: 'TV', title: 'CIA Confidential', service: 'Locations & Logistics', imagePath: '/works/posters/cia-confidential.jpg', videoUrl: 'https://www.youtube.com/embed/0dF29Bg20a8' },
-  { id: 3, type: 'poster', category: 'Movies', title: 'Aazaan', service: 'Moroccan Production Partner', imagePath: '/works/posters/aazaan.png', videoUrl: 'https://player.vimeo.com/video/75757690?badge=0&autopause=0&player_id=0&app_id=58479' },
+  { id: 3, type: 'poster', category: 'Movies', title: 'Azzan', service: 'Moroccan Production Partner', imagePath: '/works/posters/aazaan.png', videoUrl: 'https://player.vimeo.com/video/75757690?badge=0&autopause=0&player_id=0&app_id=58479' },
   { id: 4, type: 'poster', category: 'Movies', title: 'Pegasus', service: 'Moroccan Production Partner', imagePath: '/works/posters/pegase.jpg', videoUrl: 'https://player.vimeo.com/video/73678951?badge=0&autopause=0&player_id=0&app_id=58479' },
   { id: 5, type: 'poster', category: 'Movies', title: 'Midnight Fly', service: 'Production & Locations', imagePath: '/works/posters/midnight-fly.png', videoUrl: 'https://player.vimeo.com/video/81383338?badge=0&autopause=0&player_id=0&app_id=58479' },
   { id: 6, type: 'poster', category: 'Movies', title: 'Emir', service: 'Full Service Production', imagePath: '/works/posters/emir.jpg', videoUrl: 'https://www.youtube.com/embed/_iUI6Vwf4sw' },
