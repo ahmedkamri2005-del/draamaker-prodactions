@@ -203,30 +203,30 @@ export default function TaxRebateClient() {
             {/* Nested 2-column metric cards */}
             <div className="grid grid-cols-2 gap-4">
               {/* Card A */}
-              <div className="border border-zinc-700 bg-black p-6 md:p-8 relative overflow-hidden group hover:border-[#00AEEF]/60 transition-colors duration-500">
+              <div className="border border-zinc-700 bg-black p-4 sm:p-6 lg:p-8 relative overflow-hidden group hover:border-[#00AEEF]/60 transition-colors duration-500">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(0,174,239,0.05),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <p className="text-4xl md:text-5xl font-serif text-white leading-none mb-3 tracking-tight">
+                <p className="text-3xl sm:text-4xl lg:text-5xl font-serif text-white leading-none mb-3 tracking-tight">
                   10M
-                  <span className="text-2xl md:text-3xl text-[#00AEEF] ml-1">MAD</span>
+                  <span className="text-base sm:text-2xl lg:text-3xl text-[#00AEEF] ml-1">MAD</span>
                 </p>
-                <p className="text-zinc-500 text-[11px] md:text-xs leading-relaxed uppercase tracking-wider">
+                <p className="text-zinc-500 text-[10px] sm:text-[11px] lg:text-xs leading-relaxed uppercase tracking-wider">
                   Minimum local spend
-                  <span className="block text-zinc-600 normal-case tracking-normal mt-1">
+                  <span className="block text-zinc-600 normal-case tracking-normal mt-1 text-[9px] sm:text-[11px] lg:text-xs">
                     approx. $1M USD
                   </span>
                 </p>
               </div>
 
               {/* Card B */}
-              <div className="border border-zinc-700 bg-black p-6 md:p-8 relative overflow-hidden group hover:border-[#00AEEF]/60 transition-colors duration-500">
+              <div className="border border-zinc-700 bg-black p-4 sm:p-6 lg:p-8 relative overflow-hidden group hover:border-[#00AEEF]/60 transition-colors duration-500">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(0,174,239,0.05),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <p className="text-4xl md:text-5xl font-serif text-white leading-none mb-3 tracking-tight">
+                <p className="text-3xl sm:text-4xl lg:text-5xl font-serif text-white leading-none mb-3 tracking-tight">
                   18
-                  <span className="text-2xl md:text-3xl text-[#00AEEF] ml-1">DAYS</span>
+                  <span className="text-base sm:text-2xl lg:text-3xl text-[#00AEEF] ml-1">DAYS</span>
                 </p>
-                <p className="text-zinc-500 text-[11px] md:text-xs leading-relaxed uppercase tracking-wider">
+                <p className="text-zinc-500 text-[10px] sm:text-[11px] lg:text-xs leading-relaxed uppercase tracking-wider">
                   Minimum work days
-                  <span className="block text-zinc-600 normal-case tracking-normal mt-1">
+                  <span className="block text-zinc-600 normal-case tracking-normal mt-1 text-[9px] sm:text-[11px] lg:text-xs">
                     incl. set building
                   </span>
                 </p>

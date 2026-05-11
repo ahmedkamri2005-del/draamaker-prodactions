@@ -1,14 +1,37 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Send, Loader2, User } from 'lucide-react'
 import { useChat } from '@ai-sdk/react'
 
 const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
-    const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-        api: '/api/chat',
+    const { messages, sendMessage, status } = useChat({
+        maxSteps: 5,
     })
+    
+    const [input, setInput] = useState('')
+    const isLoading = status === 'submitted' || status === 'streaming'
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInput(e.target.value)
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!input.trim() || isLoading) return
+        
+        const currentInput = input
+        setInput('')
+        
+        console.log('[ChatWindow] Sending message:', currentInput)
+        
+        try {
+            await sendMessage({ parts: [{ type: 'text', text: currentInput }] })
+        } catch (err) {
+            console.error('[ChatWindow] Send failed:', err)
+        }
+    }
     
     const scrollRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
@@ -83,7 +106,12 @@ const ChatWindow = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void 
                                     ? 'bg-blue-600 text-white rounded-br-none font-medium'
                                     : 'bg-white/5 text-white/80 rounded-bl-none font-medium border border-white/5'
                                     }`}>
-                                    {msg.content}
+                    {msg.parts
+                                        ? msg.parts.map((part: any, j: number) =>
+                                            part.type === 'text' ? <span key={j}>{part.text}</span> : null
+                                          )
+                                        : (msg as any).content
+                                    }
                                 </div>
                                 {msg.role === 'user' && (
                                     <div className="w-6 h-6 rounded-full bg-blue-600/20 flex items-center justify-center flex-shrink-0 text-blue-400">
